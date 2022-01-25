@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Header from "./components/Header";
+import ProductListingPage from "./components/ProductListingPage";
+import { Route, Routes } from "react-router-dom";
+import { Component } from "react/cjs/react.development";
+import ProductDescriptionPage from "./components/ProductDescriptionPage";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Header></Header>
+
+        <Routes>
+          <Route
+            path="/women"
+            element={<ProductListingPage></ProductListingPage>}
+          ></Route>
+          <Route
+            path="/women/pdp"
+            element={<ProductDescriptionPage></ProductDescriptionPage>}
+          ></Route>
+        </Routes>
+
+        {/* <ProductListingPage></ProductListingPage> */}
+      </div>
+    );
+  }
 }
 
 export default App;

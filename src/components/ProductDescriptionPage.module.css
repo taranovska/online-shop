@@ -1,0 +1,19 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 80px 610px 300px;
+  grid-template-rows: auto;
+}
+.smallImages img {
+  width: 80px;
+  height: 79px;
+}
+.addToCartButton {
+  width: 292px;
+  height: 52px;
+  border: none;
+  color: white;
+  background: #5ece7b;
+}
+.productDetails {
+  text-align: left;
+}

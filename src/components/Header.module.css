@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  padding: 25px 100px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.links {
+  list-style-type: none;
+  display: inline;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
+  padding: 4px 16px 32px 16px;
+  color: #1d1f22;
+}
+.links:hover {
+  color: #5ece7b;
+  border-bottom: 2px solid #5ece7b;
+}
+
+.links {
+  color: #1d1f22;
+  text-decoration: none;
+}
+.currency_cart {
+  display: flex;
+}
+.selected_currency {
+  padding-right: 15px;
+}
