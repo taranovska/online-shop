@@ -1,32 +1,41 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { allItems, client } from "../index";
+import { GET_ALL_CATEGORIES } from "../query/items";
 import classes from "./Header.module.css";
 
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      categories: [],
+    };
   }
-  handleClick() {
-    return <p>Was clicked</p>;
+
+  componentDidMount() {
+    client
+      .query({
+        query: GET_ALL_CATEGORIES,
+      })
+      .then((result) => {
+        this.setState({
+          categories: result.data.categories,
+        });
+      });
   }
   render() {
+    const { categories } = this.state;
+
     return (
       <div className={classes.header}>
         <div className={classes.category_links}>
-          <ul>
-            <Link to="women" className={classes.links}>
-              Women
-            </Link>
-
-            <Link to="men" className={classes.links}>
-              Men
-            </Link>
-
-            <Link to="kids" className={classes.links}>
-              Kids
-            </Link>
-          </ul>
+          <div>
+            {categories.map((category, index = 0) => (
+              <Link to={category.name} className={classes.links} key={index++}>
+                {category.name}
+              </Link>
+            ))}
+          </div>
         </div>
         <div>
           <svg

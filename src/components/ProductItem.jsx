@@ -1,20 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Component } from "react/cjs/react.production.min";
+import { client } from "..";
+import { GET_ALL_ITEMS } from "../query/items";
 import ProductDescriptionPage from "./ProductDescriptionPage";
+import classes from "./ProductItem.module.css";
 
 class ProductItem extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
-      <Link to="/women/pdp">
-        <div>
-          <div>
-            <img src={this.props.img} alt="" />
-          </div>
-          <p>{this.props.description}</p>
-          <p>{this.props.price} </p>
+      <div className={classes.productCard} key={this.props.key}>
+        <div className={classes.mainImg}>
+          <img src={this.props.img} alt="" />
         </div>
-      </Link>
+        <div>{this.props.title}</div>
+
+        {/* <p>{product.prices[0].amount} </p> */}
+      </div>
     );
   }
 }

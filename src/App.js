@@ -5,21 +5,25 @@ import ProductListingPage from "./components/ProductListingPage";
 import { Route, Routes } from "react-router-dom";
 import { Component } from "react/cjs/react.development";
 import ProductDescriptionPage from "./components/ProductDescriptionPage";
+import ProductItem from "./components/ProductItem";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <Header></Header>
-
         <Routes>
           <Route
-            path="/women"
-            element={<ProductListingPage></ProductListingPage>}
+            path="/all"
+            element={<ProductListingPage path={"all"}></ProductListingPage>}
           ></Route>
           <Route
-            path="/women/pdp"
-            element={<ProductDescriptionPage></ProductDescriptionPage>}
+            path="/clothes"
+            element={<ProductListingPage path={"clothes"}></ProductListingPage>}
+          ></Route>
+          <Route
+            path="/tech"
+            element={<ProductListingPage path={"tech"}></ProductListingPage>}
           ></Route>
         </Routes>
 
