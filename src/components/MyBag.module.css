@@ -1,0 +1,68 @@
+.myBagWrapper {
+  width: 325px;
+  background: #ffffff;
+  padding-left: 16px;
+  position: absolute;
+  left: 1028px;
+}
+.cardItem {
+  display: flex;
+  align-content: stretch;
+  justify-content: space-between;
+  align-items: center;
+}
+.sizesBox {
+  display: flex;
+}
+.changeQuantityButton,
+.sizes {
+  border: 1px solid #1d1f22;
+  box-sizing: border-box;
+  padding: 8px 12px;
+  background-color: white;
+}
+.sizes {
+  margin-right: 8px;
+}
+.cardItemDetail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.itemImg img {
+  width: 105px;
+  height: 137px;
+}
+.bagTitle {
+  text-align: left;
+}
+.total,
+.detailButton {
+  display: flex;
+  justify-content: space-between;
+}
+.viewBagButton {
+  width: 140px;
+  height: 43px;
+  padding: 31px 13px;
+  border: 1px solid #1d1f22;
+  background: white;
+}
+.checkOutButton {
+  width: 142px;
+  height: 43px;
+  padding: 30px 13px;
+  background: #5ece7b;
+  color: white;
+  border: none;
+}
+
+.backdrop {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  background: rgba(57, 55, 72, 0.22);
+}

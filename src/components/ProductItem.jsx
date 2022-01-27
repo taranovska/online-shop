@@ -8,12 +8,12 @@ import classes from "./ProductItem.module.css";
 
 class ProductItem extends Component {
   constructor(props) {
-    super(props);
+    super();
   }
 
   render() {
     return (
-      <div className={classes.productCard} key={this.props.key}>
+      <div className={classes.productCard} key={this.props.keys}>
         <div className={classes.mainImg}>
           <img src={this.props.img} alt="" />
         </div>
