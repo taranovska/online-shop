@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { PureComponent } from "react/cjs/react.production.min";
 import { allItems, client } from "../index";
-import { GET_ALL_CATEGORIES } from "../query/items";
+import { GET_ALL_CATEGORIES, GET_ALL_CURRENCIES } from "../query/items";
+import CurrencySwitcher from "./CurrencySwitcher";
 import classes from "./Header.module.css";
 import MyBag from "./MyBag";
 
@@ -11,8 +12,27 @@ class Header extends PureComponent {
     super(props);
     this.state = {
       showMyBag: false,
+      showCurrencyList: false,
+      changeArrow: "M1 0.5L4 3.5L7 0.5",
+      currencies: [],
+      currentCurrency: "$",
     };
     this.setShowMyBag = this.setShowMyBag.bind(this);
+    this.setCloseMyBag = this.setCloseMyBag.bind(this);
+    this.setShowCurrencyList = this.setShowCurrencyList.bind(this);
+    this.setCloseCurrencyList = this.setCloseCurrencyList.bind(this);
+    this.setCurrentCurrency = this.setCurrentCurrency.bind(this);
+  }
+  componentDidMount() {
+    client
+      .query({
+        query: GET_ALL_CURRENCIES,
+      })
+      .then((result) => {
+        this.setState({
+          currencies: result.data.currencies,
+        });
+      });
   }
   setShowMyBag() {
     this.setState({ showMyBag: true });
@@ -20,10 +40,26 @@ class Header extends PureComponent {
     const { showMyBag } = this.state;
     console.log(showMyBag);
   }
+  setCurrentCurrency() {
+    this.setState({ currentCurrency: "$" });
+  }
+  setCloseMyBag() {
+    this.setState({ showMyBag: false });
+  }
+  setShowCurrencyList() {
+    this.setState({ showCurrencyList: true });
+    this.setState({ changeArrow: "M1 3.5L4 0.5L7 3.5" });
+  }
+  setCloseCurrencyList() {
+    this.setState({ showCurrencyList: false });
+    this.setState({ changeArrow: "M1 0.5L4 3.5L7 0.5" });
+  }
 
   render() {
+    const { currencies } = this.state;
+
     return (
-      <div>
+      <div className={classes.wrapper}>
         <div className={classes.header}>
           <div className={classes.category_links}>
             <div>
@@ -87,9 +123,14 @@ class Header extends PureComponent {
               </defs>
             </svg>
           </div>
+          {/* &#x24;  */}
           <div className={classes.currency_cart}>
-            <div className={classes.selected_currency}>&#x24;</div>
-            <div className={classes.arrow_up} onClick={this.handleClick}>
+            <div className={classes.selected_currency}></div>
+            {this.state.currentCurrency}
+            <div
+              className={classes.arrow_up}
+              onClick={this.setShowCurrencyList}
+            >
               <svg
                 width="8"
                 height="4"
@@ -98,19 +139,13 @@ class Header extends PureComponent {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M1 0.5L4 3.5L7 0.5"
+                  d={this.state.changeArrow}
                   stroke="black"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
               </svg>
             </div>
-
-            {/* <select>
-          <option>&#x24; USD</option>
-          <option>&#x20ac; EUR</option>
-          <option>&#xa5; JPY</option>
-        </select> */}
           </div>
           <div onClick={this.setShowMyBag}>
             <svg
@@ -135,12 +170,21 @@ class Header extends PureComponent {
             </svg>
           </div>
         </div>
-        <div>{this.state.showMyBag && <MyBag></MyBag>}</div>
+        <div>
+          {this.state.showMyBag && <MyBag change={this.setCloseMyBag}></MyBag>}
+        </div>
+        <div>
+          {this.state.showCurrencyList && (
+            <CurrencySwitcher
+              currencies={this.state.currencies}
+              change={this.setCloseCurrencyList}
+              changeCurrency={this.setCurrentCurrency}
+            ></CurrencySwitcher>
+          )}
+        </div>
       </div>
     );
   }
-
-  componentDidUpdate(prevProps, prevState) {}
 }
 
 export default Header;

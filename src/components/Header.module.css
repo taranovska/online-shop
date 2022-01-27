@@ -1,8 +1,13 @@
 .header {
+  width: 1440px;
   display: flex;
   padding: 25px 100px;
   justify-content: space-between;
   align-items: center;
+}
+.wrapper {
+  width: 1200px;
+  display: flex;
 }
 
 .links {

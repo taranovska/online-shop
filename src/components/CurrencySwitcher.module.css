@@ -1,0 +1,17 @@
+.currencySwitcher {
+  position: absolute;
+  width: 114px;
+  left: 914px;
+  top: 65px;
+  text-align: left;
+}
+.backdrop {
+  position: absolute;
+  width: 100%;
+  left: 914px;
+  top: 65px;
+  text-align: left;
+
+  height: 100vh;
+  z-index: 10;
+}

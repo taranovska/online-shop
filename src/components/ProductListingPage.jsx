@@ -1,11 +1,13 @@
 import React from "react";
-import { Component } from "react/cjs/react.production.min";
+import { Component, PureComponent } from "react/cjs/react.production.min";
 import ProductItem from "./ProductItem";
 
 import { GET_ALL_ITEMS } from "../query/items";
 import { client } from "..";
+import { Routes, Route } from "react-router";
+import ProductDescriptionPage from "./ProductDescriptionPage";
 
-class ProductListingPageTech extends Component {
+class ProductListingPage extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,7 +15,7 @@ class ProductListingPageTech extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
     client
       .query({
         query: GET_ALL_ITEMS,
@@ -21,7 +23,7 @@ class ProductListingPageTech extends Component {
       .then((result) => {
         this.setState({
           products: result.data.categories.find(
-            (category) => category.name === "tech"
+            (category) => category.name === this.props.route
           ).products,
         });
       });
@@ -34,10 +36,9 @@ class ProductListingPageTech extends Component {
         keys={Math.random()}
         img={product.gallery[0]}
         title={product.name}
-        // price={product.price}
       ></ProductItem>
     ));
   }
 }
 
-export default ProductListingPageTech;
+export default ProductListingPage;

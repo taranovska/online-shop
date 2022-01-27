@@ -5,6 +5,7 @@ import { client } from "..";
 import { GET_ALL_ITEMS } from "../query/items";
 import ProductDescriptionPage from "./ProductDescriptionPage";
 import classes from "./ProductItem.module.css";
+import { Routes, Route } from "react-router";
 
 class ProductItem extends Component {
   constructor(props) {
@@ -13,14 +14,14 @@ class ProductItem extends Component {
 
   render() {
     return (
-      <div className={classes.productCard} key={this.props.keys}>
-        <div className={classes.mainImg}>
-          <img src={this.props.img} alt="" />
+      <Link to={`/pdp/${this.props.keys}`}>
+        <div className={classes.productCard} key={this.props.keys}>
+          <div className={classes.mainImg}>
+            <img src={this.props.img} alt="" />
+          </div>
+          <div>{this.props.title}</div>
         </div>
-        <div>{this.props.title}</div>
-
-        {/* <p>{product.prices[0].amount} </p> */}
-      </div>
+      </Link>
     );
   }
 }

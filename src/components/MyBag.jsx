@@ -1,11 +1,15 @@
 import React from "react";
 import { Component } from "react/cjs/react.development";
+import { PureComponent } from "react/cjs/react.production.min";
 import classes from "./MyBag.module.css";
 
-class MyBag extends Component {
+class MyBag extends PureComponent {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
-      <div className={classes.backdrop}>
+      <div className={classes.backdrop} onClick={this.props.change}>
         <div className={classes.myBagWrapper}>
           <p className={classes.bagTitle}>My Bag, 2 items</p>
           <div className={classes.cardItem}>

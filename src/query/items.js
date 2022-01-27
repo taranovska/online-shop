@@ -62,3 +62,11 @@ export const GET_ALL_ITEMS = gql`
     }
   }
 `;
+export const GET_ALL_CURRENCIES = gql`
+  query getAllCurrencies {
+    currencies {
+      label
+      symbol
+    }
+  }
+`;
