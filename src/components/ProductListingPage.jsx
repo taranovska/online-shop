@@ -33,7 +33,7 @@ class ProductListingPage extends PureComponent {
 
     return products.map((product, index) => (
       <ProductItem
-        keys={Math.random()}
+        key={product.id}
         img={product.gallery[0]}
         title={product.name}
       ></ProductItem>

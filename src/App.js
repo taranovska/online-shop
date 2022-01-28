@@ -43,7 +43,7 @@ class App extends PureComponent {
           <Route
             path={"/pdp/:productId"}
             element={<ProductDescriptionPage></ProductDescriptionPage>}
-          ></Route>{" "}
+          ></Route>
           {categories.map((category, index) => (
             <Route
               key={index++}

@@ -14,8 +14,8 @@ class ProductItem extends Component {
 
   render() {
     return (
-      <Link to={`/pdp/${this.props.keys}`}>
-        <div className={classes.productCard} key={this.props.keys}>
+      <Link to={`/pdp/${this.props.key}`}>
+        <div className={classes.productCard} key={this.props.key}>
           <div className={classes.mainImg}>
             <img src={this.props.img} alt="" />
           </div>
