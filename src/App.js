@@ -17,6 +17,7 @@ class App extends PureComponent {
     super(props);
     this.state = {
       categories: [],
+      allItems: [],
     };
   }
 
@@ -30,10 +31,23 @@ class App extends PureComponent {
           categories: result.data.categories,
         });
       });
+    client
+      .query({
+        query: GET_ALL_ITEMS,
+      })
+      .then((result) => {
+        this.setState({
+          allItems: result.data.categories.find(
+            (category) => category.name === "all"
+          ).products,
+        });
+      });
   }
   render() {
     const { categories } = this.state;
+    const { allItems } = this.state;
     console.log(categories);
+    console.log(allItems);
     return (
       <div className="App">
         <Header categories={categories}></Header>
@@ -42,7 +56,11 @@ class App extends PureComponent {
         <Routes>
           <Route
             path={"/pdp/:productId"}
-            element={<ProductDescriptionPage></ProductDescriptionPage>}
+            element={
+              <ProductDescriptionPage
+                allItems={allItems}
+              ></ProductDescriptionPage>
+            }
           ></Route>
           {categories.map((category, index) => (
             <Route

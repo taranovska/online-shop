@@ -4,12 +4,7 @@ import classes from "./AvailableSizes.module.css";
 
 class AvailableSizes extends Component {
   render() {
-    return (
-      <div className={classes.allBoxesSize}>
-        <div className={classes.sizeBox}>XS</div>
-        <div className={classes.sizeBox}>S</div>
-      </div>
-    );
+    return <div></div>;
   }
 }
 export default AvailableSizes;

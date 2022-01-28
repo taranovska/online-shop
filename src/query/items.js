@@ -48,6 +48,7 @@ export const GET_ALL_ITEMS = gql`
       products {
         id
         name
+
         gallery
         description
         category
@@ -57,6 +58,17 @@ export const GET_ALL_ITEMS = gql`
             symbol
           }
           amount
+        }
+        inStock
+        attributes {
+          type
+          name
+          id
+          items {
+            displayValue
+            value
+            id
+          }
         }
       }
     }

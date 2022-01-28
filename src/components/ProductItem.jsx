@@ -9,13 +9,13 @@ import { Routes, Route } from "react-router";
 
 class ProductItem extends Component {
   constructor(props) {
-    super();
+    super(props);
   }
 
   render() {
     return (
-      <Link to={`/pdp/${this.props.key}`}>
-        <div className={classes.productCard} key={this.props.key}>
+      <Link to={`/pdp/${this.props.keys}`}>
+        <div className={classes.productCard} key={this.props.keys}>
           <div className={classes.mainImg}>
             <img src={this.props.img} alt="" />
           </div>

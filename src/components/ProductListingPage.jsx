@@ -34,6 +34,7 @@ class ProductListingPage extends PureComponent {
     return products.map((product, index) => (
       <ProductItem
         key={product.id}
+        keys={product.id}
         img={product.gallery[0]}
         title={product.name}
       ></ProductItem>
