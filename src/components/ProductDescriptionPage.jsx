@@ -1,23 +1,38 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Component, useEffect } from "react/cjs/react.development";
 import { PureComponent, useState } from "react/cjs/react.production.min";
-import { state } from "../store/store";
+import CartContext, { state } from "../store/cart-context";
 import AvailableSizes from "./AvailableSizes";
 import classes from "./ProductDescriptionPage.module.css";
 import { useParams } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import { client } from "..";
 import { GET_ALL_ITEMS } from "../query/items";
+import CartProvider from "../store/CartProvider";
 
 const ProductDescriptionPage = (props) => {
   const params = useParams();
   console.log(params.productId);
-
+  const context = useContext(CartContext);
   const currentProduct = props.allItems.find(
     (product) => product.id === params.productId
   );
-  console.log(currentProduct);
-  console.log(currentProduct.attributes[0]);
+  // console.log(props.allItems[2].prices[2].currency.label);
+  // const defaultCurrency = props.allItems.map((item) =>
+  //   item.prices.find((curSymbol) => curSymbol.currency.symbol === "$")
+  // );
+  const defaultCurrency = currentProduct.prices.find(
+    (curSymbol) => curSymbol.currency.symbol === "$"
+  );
+  console.log(defaultCurrency);
+  const addToCartButtonHandler = () => {
+    console.log(typeof context.products);
+    // context.items.push({e
+    //   name: currentProduct.name,
+    //   price: defaultCurrency.currency.symbol + defaultCurrency.amount,
+    // });
+  };
+
   return (
     <div className={classes.wrapper}>
       <div className={classes.smallImages}>
@@ -32,31 +47,81 @@ const ProductDescriptionPage = (props) => {
         <p>{currentProduct.name}</p>
 
         <div>
-          {currentProduct.attributes.map((attribute, index) => attribute.name)}
-        </div>
-
-        <div>
-          <div className={classes.allBoxesSize}>
-            {currentProduct.attributes.map(
-              (checkAttribute, index) =>
-                checkAttribute.name === "Color" &&
-                checkAttribute.items.map((attribute, index) => (
-                  <div
-                    className={classes.sizeBox}
-                    style={{
-                      backgroundColor: attribute.id,
-                    }}
-                  ></div>
-                ))
-            )}
-          </div>
+          {currentProduct.attributes.map(
+            (attribute, index) =>
+              attribute.name === "Color" && (
+                <div>
+                  <div>{attribute.name}</div>
+                  <div className={classes.allBoxesSize}>
+                    {attribute.items.map((attribute, index) => (
+                      <div
+                        className={classes.sizeBox}
+                        style={{
+                          backgroundColor: attribute.id,
+                        }}
+                      ></div>
+                    ))}
+                  </div>
+                </div>
+              )
+          )}
+          {currentProduct.attributes.map(
+            (attribute, index) =>
+              attribute.name === "Size" && (
+                <div>
+                  <div>{attribute.name}</div>
+                  <div className={classes.allBoxesSize}>
+                    {attribute.items.map((attribute, index) => (
+                      <div className={classes.sizeBox}>
+                        {attribute.displayValue}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )
+          )}
+          {currentProduct.attributes.map(
+            (attribute, index) =>
+              attribute.name === "Capacity" && (
+                <div>
+                  <div>{attribute.name}</div>
+                  <div className={classes.allBoxesSize}>
+                    {attribute.items.map((attribute, index) => (
+                      <div className={classes.sizeBox}>
+                        {attribute.displayValue}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )
+          )}
+          {currentProduct.attributes.map(
+            (attribute, index) =>
+              attribute.name === "With USB 3 ports" && (
+                <div>
+                  <div>{attribute.name}</div>
+                  <div className={classes.allBoxesSize}>
+                    {attribute.items.map((attribute, index) => (
+                      <div className={classes.sizeBox}>
+                        {attribute.displayValue}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )
+          )}
         </div>
         <div>
           Price:
-          <p>$50.00</p>
+          <p>{defaultCurrency.currency.symbol + defaultCurrency.amount}</p>
         </div>
         <div>
-          <button className={classes.addToCartButton}>ADD TO CART</button>
+          <button
+            className={classes.addToCartButton}
+            onClick={addToCartButtonHandler}
+          >
+            ADD TO CART
+          </button>
         </div>
 
         <div dangerouslySetInnerHTML={{ __html: currentProduct.description }} />

@@ -1,17 +1,24 @@
 import React from "react";
 import { Component } from "react/cjs/react.development";
 import { PureComponent } from "react/cjs/react.production.min";
+import CartContext from "../store/cart-context";
+import CartProvider from "../store/CartProvider";
 import classes from "./MyBag.module.css";
 
 class MyBag extends PureComponent {
   constructor(props) {
     super(props);
   }
+  static contextType = CartContext;
+
   render() {
+    const numberOfCartItems = this.context.items.reduce((curNumber, item) => {
+      return curNumber + item.amount;
+    }, 0);
     return (
       <div className={classes.backdrop} onClick={this.props.change}>
         <div className={classes.myBagWrapper}>
-          <p className={classes.bagTitle}>My Bag, 2 items</p>
+          <p className={classes.bagTitle}>My Bag, {numberOfCartItems} items</p>
           <div className={classes.cardItem}>
             <div className={classes.cardItemDetail}>
               <div>Apollo Running Short</div>
@@ -33,7 +40,8 @@ class MyBag extends PureComponent {
                   alt=""
                 />
               </div>
-            </div>
+            </div>{" "}
+            <div>X</div>
           </div>
           <div className={classes.total}>
             <div>Total</div>

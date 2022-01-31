@@ -57,7 +57,7 @@ class Header extends PureComponent {
 
   render() {
     const { currencies } = this.state;
-
+    console.log(this.state);
     return (
       <div className={classes.wrapper}>
         <div className={classes.header}>

@@ -6,6 +6,7 @@ import { GET_ALL_ITEMS } from "../query/items";
 import { client } from "..";
 import { Routes, Route } from "react-router";
 import ProductDescriptionPage from "./ProductDescriptionPage";
+import CartContext from "../store/cart-context";
 
 class ProductListingPage extends PureComponent {
   constructor(props) {
@@ -30,6 +31,7 @@ class ProductListingPage extends PureComponent {
   }
   render() {
     const { products } = this.state;
+    console.log(products);
 
     return products.map((product, index) => (
       <ProductItem
@@ -37,6 +39,7 @@ class ProductListingPage extends PureComponent {
         keys={product.id}
         img={product.gallery[0]}
         title={product.name}
+        prices={product.prices}
       ></ProductItem>
     ));
   }

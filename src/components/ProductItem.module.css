@@ -2,7 +2,19 @@
   width: 386px;
   height: 444px;
   padding: 16px;
+  position: relative;
+  z-index: 1;
 }
+.productCard:hover {
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+}
+.bucket {
+  visibility: hidden;
+}
+.productCard:hover > .bucket {
+  visibility: visible;
+}
+
 .mainImg img {
   object-fit: cover;
   width: 354px;

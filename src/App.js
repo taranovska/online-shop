@@ -11,6 +11,7 @@ import { client } from ".";
 import { GET_ALL_CATEGORIES, GET_ALL_ITEMS } from "./query/items";
 import { PureComponent } from "react/cjs/react.production.min";
 import CurrencySwitcher from "./components/CurrencySwitcher";
+import CartProvider from "./store/CartProvider";
 
 class App extends PureComponent {
   constructor(props) {
@@ -50,61 +51,35 @@ class App extends PureComponent {
     console.log(allItems);
     return (
       <div className="App">
-        <Header categories={categories}></Header>
-        {/* <ProductListingPageAll path="all"></ProductListingPageAll> */}
-
-        <Routes>
-          <Route
-            path={"/pdp/:productId"}
-            element={
-              <ProductDescriptionPage
-                allItems={allItems}
-              ></ProductDescriptionPage>
-            }
-          ></Route>
-          {categories.map((category, index) => (
+        <CartProvider>
+          {" "}
+          <Header categories={categories}></Header>
+          {/* <ProductListingPage path="/"></ProductListingPage> */}
+          <Routes>
             <Route
-              key={index++}
-              path={category.name}
+              path={"/pdp/:productId"}
               element={
-                <ProductListingPage route={category.name}></ProductListingPage>
+                <CartProvider>
+                  {" "}
+                  <ProductDescriptionPage
+                    allItems={allItems}
+                  ></ProductDescriptionPage>
+                </CartProvider>
               }
             ></Route>
-          ))}
-        </Routes>
-
-        {/* <Route
-            path="/clothes"
-            element={
-              <ProductListingPageClothes
-                path={"clothes"}
-              ></ProductListingPageClothes>
-            }
-          ></Route>
-
-          <Route
-            path="/all"
-            element={
-              <ProductListingPageAll path={"all"}></ProductListingPageAll>
-            }
-          ></Route>
-          <Route
-            path="/tech"
-            element={
-              <ProductListingPageTech path={"tech"}></ProductListingPageTech>
-            }
-          ></Route>
-        </Routes> */}
-        {/* <Route
-            path="/clothes"
-            element={<ProductListingPage path={"clothes"}></ProductListingPage>}
-          ></Route>
-          <Route
-            path="/tech"
-            element={<ProductListingPage path={"tech"}></ProductListingPage>}
-          ></Route>*/}
-
-        {/* <ProductListingPage></ProductListingPage> */}
+            {categories.map((category, index) => (
+              <Route
+                key={index++}
+                path={category.name}
+                element={
+                  <ProductListingPage
+                    route={category.name}
+                  ></ProductListingPage>
+                }
+              ></Route>
+            ))}
+          </Routes>
+        </CartProvider>
       </div>
     );
   }
