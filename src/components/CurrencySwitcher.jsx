@@ -7,7 +7,12 @@ import classes from "./CurrencySwitcher.module.css";
 class CurrencySwitcher extends PureComponent {
   constructor(props) {
     super(props);
+    // this.changeCurrency = this.changeCurrency.bind(this);
   }
+
+  // changeCurrency() {
+  //   console.log("cklicked");
+  // }
 
   render() {
     const classesCurrency = classes.currencySwitcher + " " + classes.backdrop;
@@ -16,7 +21,6 @@ class CurrencySwitcher extends PureComponent {
       <div className={classesCurrency} onClick={this.props.change}>
         {this.props.currencies.map((currency, index) => (
           <Currency
-            onClick={this.props.changeCurrency}
             key={index++}
             symbol={currency.symbol}
             label={currency.label}

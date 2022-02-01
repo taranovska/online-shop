@@ -3,6 +3,8 @@ import { Link, NavLink } from "react-router-dom";
 import { PureComponent } from "react/cjs/react.production.min";
 import { allItems, client } from "../index";
 import { GET_ALL_CATEGORIES, GET_ALL_CURRENCIES } from "../query/items";
+import CurrencyContext from "../store/currency-context";
+import CurrencyProvider from "../store/CurrencyProvider";
 import CurrencySwitcher from "./CurrencySwitcher";
 import classes from "./Header.module.css";
 import MyBag from "./MyBag";
@@ -21,7 +23,6 @@ class Header extends PureComponent {
     this.setCloseMyBag = this.setCloseMyBag.bind(this);
     this.setShowCurrencyList = this.setShowCurrencyList.bind(this);
     this.setCloseCurrencyList = this.setCloseCurrencyList.bind(this);
-    this.setCurrentCurrency = this.setCurrentCurrency.bind(this);
   }
   componentDidMount() {
     client
@@ -40,9 +41,7 @@ class Header extends PureComponent {
     const { showMyBag } = this.state;
     console.log(showMyBag);
   }
-  setCurrentCurrency() {
-    this.setState({ currentCurrency: "$" });
-  }
+
   setCloseMyBag() {
     this.setState({ showMyBag: false });
   }
@@ -54,7 +53,7 @@ class Header extends PureComponent {
     this.setState({ showCurrencyList: false });
     this.setState({ changeArrow: "M1 0.5L4 3.5L7 0.5" });
   }
-
+  static contextType = CurrencyContext;
   render() {
     const { currencies } = this.state;
     console.log(this.state);
@@ -177,8 +176,8 @@ class Header extends PureComponent {
           {this.state.showCurrencyList && (
             <CurrencySwitcher
               currencies={this.state.currencies}
+              currentCurrency={this.state.currentCurrency}
               change={this.setCloseCurrencyList}
-              changeCurrency={this.setCurrentCurrency}
             ></CurrencySwitcher>
           )}
         </div>

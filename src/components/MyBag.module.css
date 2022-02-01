@@ -1,19 +1,10 @@
 .myBagWrapper {
-  width: 325px;
   background: #ffffff;
   padding-left: 16px;
   position: absolute;
   left: 1028px;
 }
-.cardItem {
-  display: flex;
-  align-content: stretch;
-  justify-content: space-between;
-  align-items: center;
-}
-.sizesBox {
-  display: flex;
-}
+
 .changeQuantityButton,
 .sizes {
   border: 1px solid #1d1f22;
@@ -21,18 +12,7 @@
   padding: 8px 12px;
   background-color: white;
 }
-.sizes {
-  margin-right: 8px;
-}
-.cardItemDetail {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.itemImg img {
-  width: 105px;
-  height: 137px;
-}
+
 .bagTitle {
   text-align: left;
 }

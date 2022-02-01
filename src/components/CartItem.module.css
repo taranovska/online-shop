@@ -1,0 +1,50 @@
+.cardItem {
+  display: flex;
+  align-content: stretch;
+  justify-content: space-between;
+  align-items: center;
+}
+.cardItemDetail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sizesBox {
+  display: flex;
+}
+
+.changeQuantityButton,
+.sizes {
+  border: 1px solid #1d1f22;
+  box-sizing: border-box;
+  padding: 8px 12px;
+  background-color: white;
+}
+.sizes {
+  margin-right: 8px;
+  border: none;
+}
+.itemImg img {
+  width: 105px;
+  height: 137px;
+}
+.sizeBox {
+  width: 63px;
+  height: 45px;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #1d1f22;
+  color: #1d1f22;
+  box-sizing: border-box;
+}
+.allBoxesSize {
+  display: flex;
+}
+.sizeBox:hover {
+  background: #1d1f22;
+  border: 1px solid #1d1f22;
+  color: white;
+}

@@ -25,12 +25,18 @@ const ProductDescriptionPage = (props) => {
     (curSymbol) => curSymbol.currency.symbol === "$"
   );
   console.log(defaultCurrency);
-  const addToCartButtonHandler = () => {
-    console.log(typeof context.products);
-    // context.items.push({e
-    //   name: currentProduct.name,
-    //   price: defaultCurrency.currency.symbol + defaultCurrency.amount,
-    // });
+  const amountInputRef = 1;
+  const addToCartButtonHandler = (e) => {
+    const enteredAmountNumber = +amountInputRef;
+    context.addItem({
+      id: params.productId,
+      name: currentProduct.name,
+      amount: enteredAmountNumber,
+      price: defaultCurrency.currency.symbol + defaultCurrency.amount,
+      attributes: currentProduct.attributes,
+      img: currentProduct.gallery[0],
+    });
+    console.log(context);
   };
 
   return (

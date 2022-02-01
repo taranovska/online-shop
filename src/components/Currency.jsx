@@ -1,12 +1,17 @@
 import React from "react";
-import { PureComponent } from "react/cjs/react.development";
+import { Component } from "react";
+import classes from "./Currency.module.css";
 
-class Currency extends PureComponent {
+class Currency extends Component {
   constructor(props) {
     super(props);
   }
   render() {
-    return <div>{this.props.symbol + " " + this.props.label}</div>;
+    return (
+      <div className={classes.currency}>
+        {this.props.symbol + " " + this.props.label}
+      </div>
+    );
   }
 }
 
