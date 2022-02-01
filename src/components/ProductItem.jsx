@@ -6,11 +6,14 @@ import { GET_ALL_ITEMS } from "../query/items";
 import ProductDescriptionPage from "./ProductDescriptionPage";
 import classes from "./ProductItem.module.css";
 import { Routes, Route } from "react-router";
+import CartContext from "../store/cart-context";
 
 class ProductItem extends Component {
   constructor(props) {
     super(props);
+    // this.addToCartButton = this.addToCartButton.bind(this);
   }
+  static contextType = CartContext;
 
   render() {
     const defaultCurrency = this.props.prices.find(
@@ -72,7 +75,7 @@ class ProductItem extends Component {
                   filterUnits="userSpaceOnUse"
                   colorInterpolationFilters="sRGB"
                 >
-                  <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                  <feFlood floodOpacity="0" result="BackgroundImageFix" />
                   <feColorMatrix
                     in="SourceAlpha"
                     type="matrix"

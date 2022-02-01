@@ -15,6 +15,7 @@ class ProductListingPage extends PureComponent {
       products: [],
     };
   }
+  static contextType = CartContext;
 
   componentDidUpdate() {
     client

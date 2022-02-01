@@ -3,11 +3,11 @@ import { Link, NavLink } from "react-router-dom";
 import { PureComponent } from "react/cjs/react.production.min";
 import { allItems, client } from "../index";
 import { GET_ALL_CATEGORIES, GET_ALL_CURRENCIES } from "../query/items";
-import CurrencyContext from "../store/currency-context";
-import CurrencyProvider from "../store/CurrencyProvider";
+
 import CurrencySwitcher from "./CurrencySwitcher";
 import classes from "./Header.module.css";
 import MyBag from "./MyBag";
+import { connect } from "react-redux";
 
 class Header extends PureComponent {
   constructor(props) {
@@ -17,13 +17,13 @@ class Header extends PureComponent {
       showCurrencyList: false,
       changeArrow: "M1 0.5L4 3.5L7 0.5",
       currencies: [],
-      currentCurrency: "$",
     };
     this.setShowMyBag = this.setShowMyBag.bind(this);
     this.setCloseMyBag = this.setCloseMyBag.bind(this);
     this.setShowCurrencyList = this.setShowCurrencyList.bind(this);
     this.setCloseCurrencyList = this.setCloseCurrencyList.bind(this);
   }
+
   componentDidMount() {
     client
       .query({
@@ -53,10 +53,10 @@ class Header extends PureComponent {
     this.setState({ showCurrencyList: false });
     this.setState({ changeArrow: "M1 0.5L4 3.5L7 0.5" });
   }
-  static contextType = CurrencyContext;
+
   render() {
     const { currencies } = this.state;
-    console.log(this.state);
+
     return (
       <div className={classes.wrapper}>
         <div className={classes.header}>
@@ -125,7 +125,8 @@ class Header extends PureComponent {
           {/* &#x24;  */}
           <div className={classes.currency_cart}>
             <div className={classes.selected_currency}></div>
-            {this.state.currentCurrency}
+            {/* {this.state.currentCurrency} */}
+            {this.props.currency}
             <div
               className={classes.arrow_up}
               onClick={this.setShowCurrencyList}
@@ -176,7 +177,7 @@ class Header extends PureComponent {
           {this.state.showCurrencyList && (
             <CurrencySwitcher
               currencies={this.state.currencies}
-              currentCurrency={this.state.currentCurrency}
+              currentCurrency={this.props.currency}
               change={this.setCloseCurrencyList}
             ></CurrencySwitcher>
           )}
@@ -186,4 +187,15 @@ class Header extends PureComponent {
   }
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    currency: state.currency,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCurrency: () => dispatch({ type: "changeCurrency" }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

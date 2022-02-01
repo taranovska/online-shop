@@ -36,7 +36,6 @@ const ProductDescriptionPage = (props) => {
       attributes: currentProduct.attributes,
       img: currentProduct.gallery[0],
     });
-    console.log(context);
   };
 
   return (

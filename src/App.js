@@ -12,8 +12,6 @@ import { GET_ALL_CATEGORIES, GET_ALL_ITEMS } from "./query/items";
 import { PureComponent } from "react/cjs/react.production.min";
 import CurrencySwitcher from "./components/CurrencySwitcher";
 import CartProvider from "./store/CartProvider";
-import CurrencyProvider from "./store/CurrencyProvider";
-import CurrencyContext from "./store/currency-context";
 
 class App extends PureComponent {
   constructor(props) {
@@ -53,33 +51,31 @@ class App extends PureComponent {
     console.log(allItems);
     return (
       <div className="App">
-        <CurrencyProvider>
-          <CartProvider>
-            <Header categories={categories}></Header>
-            {/* <ProductListingPage path="/"></ProductListingPage> */}
-            <Routes>
+        <CartProvider>
+          <Header categories={categories}></Header>
+          {/* <ProductListingPage path="/"></ProductListingPage> */}
+          <Routes>
+            <Route
+              path={"/pdp/:productId"}
+              element={
+                <ProductDescriptionPage
+                  allItems={allItems}
+                ></ProductDescriptionPage>
+              }
+            ></Route>
+            {categories.map((category, index) => (
               <Route
-                path={"/pdp/:productId"}
+                key={index++}
+                path={category.name}
                 element={
-                  <ProductDescriptionPage
-                    allItems={allItems}
-                  ></ProductDescriptionPage>
+                  <ProductListingPage
+                    route={category.name}
+                  ></ProductListingPage>
                 }
               ></Route>
-              {categories.map((category, index) => (
-                <Route
-                  key={index++}
-                  path={category.name}
-                  element={
-                    <ProductListingPage
-                      route={category.name}
-                    ></ProductListingPage>
-                  }
-                ></Route>
-              ))}
-            </Routes>
-          </CartProvider>
-        </CurrencyProvider>
+            ))}
+          </Routes>
+        </CartProvider>
       </div>
     );
   }
