@@ -7,6 +7,7 @@ import ProductDescriptionPage from "./ProductDescriptionPage";
 import classes from "./ProductItem.module.css";
 import { Routes, Route } from "react-router";
 import CartContext from "../store/cart-context";
+import { connect } from "react-redux";
 
 class ProductItem extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class ProductItem extends Component {
 
   render() {
     const defaultCurrency = this.props.prices.find(
-      (price) => price.currency.symbol === "$"
+      (price) => price.currency.symbol === this.props.currency
     );
     console.log(defaultCurrency);
     return (
@@ -109,4 +110,10 @@ class ProductItem extends Component {
   }
 }
 
-export default ProductItem;
+const mapStateToProps = (state) => {
+  return {
+    currency: state.currency,
+  };
+};
+
+export default connect(mapStateToProps)(ProductItem);

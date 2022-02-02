@@ -40,6 +40,7 @@
   color: #1d1f22;
   box-sizing: border-box;
 }
+
 .allBoxesSize {
   display: flex;
 }

@@ -122,10 +122,10 @@ class Header extends PureComponent {
               </defs>
             </svg>
           </div>
-          {/* &#x24;  */}
+
           <div className={classes.currency_cart}>
             <div className={classes.selected_currency}></div>
-            {/* {this.state.currentCurrency} */}
+
             {this.props.currency}
             <div
               className={classes.arrow_up}

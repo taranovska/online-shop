@@ -9,6 +9,7 @@ import { Routes, Route } from "react-router";
 import { client } from "..";
 import { GET_ALL_ITEMS } from "../query/items";
 import CartProvider from "../store/CartProvider";
+import { connect } from "react-redux";
 
 const ProductDescriptionPage = (props) => {
   const params = useParams();
@@ -22,7 +23,7 @@ const ProductDescriptionPage = (props) => {
   //   item.prices.find((curSymbol) => curSymbol.currency.symbol === "$")
   // );
   const defaultCurrency = currentProduct.prices.find(
-    (curSymbol) => curSymbol.currency.symbol === "$"
+    (curSymbol) => curSymbol.currency.symbol === props.currency
   );
   console.log(defaultCurrency);
   const amountInputRef = 1;
@@ -135,4 +136,10 @@ const ProductDescriptionPage = (props) => {
   );
 };
 
-export default ProductDescriptionPage;
+const mapStateToProps = (state) => {
+  return {
+    currency: state.currency,
+  };
+};
+
+export default connect(mapStateToProps)(ProductDescriptionPage);
