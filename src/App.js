@@ -3,7 +3,7 @@ import "./App.css";
 import Header from "./components/Header";
 import ProductListingPage from "./components/ProductListingPage";
 import { Route, Routes } from "react-router-dom";
-import { Switch } from "react-router";
+import { Redirect } from "react-router-dom";
 import { Component } from "react/cjs/react.development";
 import ProductDescriptionPage from "./components/ProductDescriptionPage";
 import ProductItem from "./components/ProductItem";
@@ -12,6 +12,8 @@ import { GET_ALL_CATEGORIES, GET_ALL_ITEMS } from "./query/items";
 import { PureComponent } from "react/cjs/react.production.min";
 import CurrencySwitcher from "./components/CurrencySwitcher";
 import CartProvider from "./store/CartProvider";
+import AllProducts from "./components/AllProducts";
+import Cart from "./components/Cart";
 
 class App extends PureComponent {
   constructor(props) {
@@ -47,13 +49,12 @@ class App extends PureComponent {
   render() {
     const { categories } = this.state;
     const { allItems } = this.state;
-    console.log(categories);
-    console.log(allItems);
+
     return (
       <div className="App">
         <CartProvider>
           <Header categories={categories}></Header>
-          {/* <ProductListingPage path="/"></ProductListingPage> */}
+
           <Routes>
             <Route
               path={"/pdp/:productId"}
@@ -74,6 +75,8 @@ class App extends PureComponent {
                 }
               ></Route>
             ))}
+            <Route path="/cart" element={<Cart></Cart>}></Route>
+            <Route path="/" element={<AllProducts></AllProducts>}></Route>
           </Routes>
         </CartProvider>
       </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Component } from "react/cjs/react.development";
 import { PureComponent } from "react/cjs/react.production.min";
 import CartContext from "../store/cart-context";
@@ -9,37 +10,49 @@ import classes from "./MyBag.module.css";
 class MyBag extends PureComponent {
   constructor(props) {
     super(props);
-    this.cartItemPlusHandler = this.cartItemPlusHandler.bind(this);
-    this.cartItemMinusHandler = this.cartItemMinusHandler.bind(this);
+    this.cartItemAddHandler = this.cartItemAddHandler.bind(this);
+    this.cartItemRemoveHandler = this.cartItemRemoveHandler.bind(this);
   }
 
   static contextType = CartContext;
 
-  cartItemPlusHandler() {
-    console.log(this.context.items);
+  cartItemAddHandler(item) {
+    this.context.addItem({ ...item, amount: 1 });
   }
-  cartItemMinusHandler() {}
+  cartItemRemoveHandler(id) {
+    this.context.removeItem(id);
+  }
 
   render() {
     const numberOfCartItems = this.context.items.reduce((curNumber, item) => {
       return curNumber + item.amount;
     }, 0);
 
+    const totalAmount =
+      this.props.currency + "" + this.context.totalAmount.toFixed(2);
+
     return (
       <div className={classes.backdrop} onClick={this.props.change}>
         <div className={classes.myBagWrapper}>
           <p className={classes.bagTitle}>My Bag, {numberOfCartItems} items</p>
 
-          {this.context.items.map((item, index) => (
-            <CartItem item={item} key={index++}></CartItem>
+          {this.context.items.map((item) => (
+            <CartItem
+              item={item}
+              key={item.id}
+              onAdd={this.cartItemAddHandler.bind(null, item)}
+              onRemove={this.cartItemRemoveHandler.bind(null, item.id)}
+            ></CartItem>
           ))}
 
           <div className={classes.total}>
             <div>Total</div>
-            <div>{this.context.totalAmount}</div>
+            <div>{totalAmount}</div>
           </div>
           <div className={classes.detailButton}>
-            <button className={classes.viewBagButton}>View Bag</button>
+            <Link to="/cart">
+              <button className={classes.viewBagButton}>View Bag</button>
+            </Link>
             <button className={classes.checkOutButton}>Check out</button>
           </div>
         </div>

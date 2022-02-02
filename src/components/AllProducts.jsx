@@ -1,8 +1,11 @@
 import React from "react";
-import { PureComponent } from "react/cjs/react.production.min";
+import { Component, PureComponent } from "react/cjs/react.production.min";
 import ProductItem from "./ProductItem";
+
 import { GET_ALL_ITEMS } from "../query/items";
 import { client } from "..";
+import { Routes, Route } from "react-router";
+import ProductDescriptionPage from "./ProductDescriptionPage";
 import CartContext from "../store/cart-context";
 
 class ProductListingPage extends PureComponent {
@@ -22,7 +25,7 @@ class ProductListingPage extends PureComponent {
       .then((result) => {
         this.setState({
           products: result.data.categories.find(
-            (category) => category.name === this.props.route
+            (category) => category.name === "all"
           ).products,
         });
       });

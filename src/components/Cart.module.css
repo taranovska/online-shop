@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&family=Roboto+Condensed:wght@700&family=Roboto:wght@400;500;700&family=Source+Sans+Pro&display=swap");
+.wrapper {
+  width: 1098px;
+  border: 1px solid #e5e5e5;
+  border-left: none;
+  border-right: none;
+}
+.title {
+  text-align: left;
+  font-family: Raleway;
+  font-weight: 700;
+  font-size: 32px;
+  text-transform: uppercase;
+  color: #1d1f22;
+}

@@ -1,14 +1,8 @@
 import React, { useContext } from "react";
-import { Component, useEffect } from "react/cjs/react.development";
-import { PureComponent, useState } from "react/cjs/react.production.min";
 import CartContext, { state } from "../store/cart-context";
-import AvailableSizes from "./AvailableSizes";
 import classes from "./ProductDescriptionPage.module.css";
 import { useParams } from "react-router-dom";
-import { Routes, Route } from "react-router";
-import { client } from "..";
-import { GET_ALL_ITEMS } from "../query/items";
-import CartProvider from "../store/CartProvider";
+
 import { connect } from "react-redux";
 
 const ProductDescriptionPage = (props) => {
@@ -18,22 +12,18 @@ const ProductDescriptionPage = (props) => {
   const currentProduct = props.allItems.find(
     (product) => product.id === params.productId
   );
-  // console.log(props.allItems[2].prices[2].currency.label);
-  // const defaultCurrency = props.allItems.map((item) =>
-  //   item.prices.find((curSymbol) => curSymbol.currency.symbol === "$")
-  // );
   const defaultCurrency = currentProduct.prices.find(
     (curSymbol) => curSymbol.currency.symbol === props.currency
   );
-  console.log(defaultCurrency);
-  const amountInputRef = 1;
+
   const addToCartButtonHandler = (e) => {
-    const enteredAmountNumber = +amountInputRef;
+    const enteredAmountNumber = 1;
     context.addItem({
       id: params.productId,
       name: currentProduct.name,
       amount: enteredAmountNumber,
       price: defaultCurrency.currency.symbol + defaultCurrency.amount,
+      priceWithOutSymbol: defaultCurrency.amount,
       attributes: currentProduct.attributes,
       img: currentProduct.gallery[0],
     });

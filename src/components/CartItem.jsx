@@ -6,29 +6,10 @@ class CartItem extends PureComponent {
   constructor(props) {
     super();
     const amount = props.item.amount;
-
-    // this.state = {
-    //   amount: amount,
-    // };
-
-    // this.cartItemPlusHandler = this.cartItemPlusHandler.bind(this);
-    // this.cartItemMinusHandler = this.cartItemMinusHandler.bind(this);
   }
-  // cartItemPlusHandler(e) {
-  //   e.stopPropagation();
-  //   const newAmount = this.state.amount + 1;
-  //   this.setState({ amount: newAmount });
-  // }
-  // cartItemMinusHandler(e) {
-  //   e.stopPropagation();
-  //   const newAmount = this.state.amount - 1;
-  //   this.setState({ amount: newAmount });
-  // }
 
   render() {
-    // const { amount } = this.state;
     return (
-      // amount >= 1 && (
       <div className={classes.cardItem}>
         <div className={classes.cardItemDetail}>
           <div>{this.props.item.name}</div>
@@ -102,14 +83,14 @@ class CartItem extends PureComponent {
         <div>
           <button
             className={classes.changeQuantityButton}
-            // onClick={this.cartItemPlusHandler}
+            onClick={this.props.onAdd}
           >
             +
           </button>
-          <div>{/* {amount} */}</div>
+          <div>{this.props.item.amount}</div>
           <button
             className={classes.changeQuantityButton}
-            // onClick={this.cartItemMinusHandler}
+            onClick={this.props.onRemove}
           >
             -
           </button>
@@ -119,7 +100,6 @@ class CartItem extends PureComponent {
             <img src={this.props.item.img} alt="" />
           </div>
         </div>
-        <div>X</div>
       </div>
     );
     // );
