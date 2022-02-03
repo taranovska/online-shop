@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&family=Roboto+Condensed:wght@700&family=Roboto:wght@400;500;700&family=Source+Sans+Pro&display=swap");
+
 .cardItem {
   display: flex;
   align-content: stretch;
@@ -8,17 +10,22 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  width: 150px;
 }
 
 .sizesBox {
   display: flex;
 }
 
-.changeQuantityButton,
 .sizes {
   border: 1px solid #1d1f22;
   box-sizing: border-box;
   padding: 8px 12px;
+  background-color: white;
+}
+.changeQuantityButton {
+  border: 1px solid #1d1f22;
+  box-sizing: border-box;
   background-color: white;
 }
 .sizes {
@@ -39,13 +46,43 @@
   border: 1px solid #1d1f22;
   color: #1d1f22;
   box-sizing: border-box;
+  font-family: Raleway;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 160%;
+  color: #1d1f22;
 }
 
 .allBoxesSize {
   display: flex;
+  margin-bottom: 20px;
+}
+.attribute {
+  font-family: Raleway;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 160%;
+  color: #1d1f22;
 }
 .sizeBox:hover {
   background: #1d1f22;
   border: 1px solid #1d1f22;
   color: white;
+}
+.amount {
+  text-align: center !important;
+  font-family: Raleway;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 160%;
+  text-align: right;
+  color: #1d1f22;
+}
+.attributeTitle {
+  font-family: Raleway;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 160%;
+  color: #1d1f22;
+  margin-right: 10px;
 }

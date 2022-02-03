@@ -4,6 +4,7 @@ import ProductItem from "./ProductItem";
 import { GET_ALL_ITEMS } from "../query/items";
 import { client } from "..";
 import CartContext from "../store/cart-context";
+import classes from "./ProductListingPage.module.css";
 
 class ProductListingPage extends PureComponent {
   constructor(props) {
@@ -30,16 +31,21 @@ class ProductListingPage extends PureComponent {
   render() {
     const { products } = this.state;
 
-    return products.map((product, index) => (
-      <ProductItem
-        key={product.id}
-        keys={product.id}
-        img={product.gallery[0]}
-        title={product.name}
-        prices={product.prices}
-        attributes={product.attributes}
-      ></ProductItem>
-    ));
+    return (
+      <div>
+        <p className={classes.categoryName}>{this.props.route}</p>
+        {products.map((product, index) => (
+          <ProductItem
+            key={product.id}
+            keys={product.id}
+            img={product.gallery[0]}
+            title={product.name}
+            prices={product.prices}
+            attributes={product.attributes}
+          ></ProductItem>
+        ))}
+      </div>
+    );
   }
 }
 

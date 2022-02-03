@@ -1,4 +1,5 @@
 .productCard {
+  display: inline-block;
   width: 386px;
   height: 444px;
   padding: 16px;

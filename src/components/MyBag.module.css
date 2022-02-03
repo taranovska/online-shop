@@ -2,6 +2,8 @@
 
 .myBagWrapper {
   background: #ffffff;
+
+  padding: 20px;
   padding-left: 16px;
   position: absolute;
   left: 1028px;
@@ -19,7 +21,6 @@
 .bagTitle {
   text-align: left;
   font-family: Raleway;
-  font-style: normal;
   font-weight: 500;
   font-size: 18px;
   line-height: 160%;
@@ -29,6 +30,11 @@
 .detailButton {
   display: flex;
   justify-content: space-between;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: #1d1f22;
 }
 .viewBagButton {
   width: 140px;
@@ -36,14 +42,28 @@
   padding: 31px 13px;
   border: 1px solid #1d1f22;
   background: white;
+  font-family: Raleway;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: #1d1f22;
+  margin-right: 10px;
 }
 .checkOutButton {
   width: 142px;
-  height: 43px;
+  height: 65px;
   padding: 30px 13px;
   background: #5ece7b;
-  color: white;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: #ffffff;
   border: none;
+  margin-right: 10px;
 }
 
 .backdrop {
@@ -54,4 +74,12 @@
   height: 100vh;
   z-index: 10;
   background: rgba(57, 55, 72, 0.22);
+}
+span {
+  font-family: Raleway;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 160%;
+  text-align: right;
+  color: #1d1f22;
 }

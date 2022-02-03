@@ -59,6 +59,9 @@ class Header extends PureComponent {
       sum = sum + item.amount;
       return sum;
     });
+    let result = quantityOfItems.reduce(function (sum, elem) {
+      return sum + elem;
+    }, 0);
     const { currencies } = this.state;
 
     return (
@@ -153,9 +156,7 @@ class Header extends PureComponent {
           </div>
           <div onClick={this.setShowMyBag}>
             <div className={classes.myBag}>
-              {quantityOfItems[0] > 0 && (
-                <div className={classes.myBagBadge}>{quantityOfItems[0]}</div>
-              )}
+              {result > 0 && <div className={classes.myBagBadge}>{result}</div>}
               <svg
                 width="20"
                 height="20"

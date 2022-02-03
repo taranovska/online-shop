@@ -5,7 +5,6 @@ import classes from "./CartItem.module.css";
 class CartItem extends PureComponent {
   constructor(props) {
     super();
-    const amount = props.item.amount;
   }
 
   render() {
@@ -19,59 +18,34 @@ class CartItem extends PureComponent {
               <div>
                 {this.props.item.attributes.map(
                   (attribute, index) =>
-                    attribute.name === "Color" && (
+                    attribute.title === "Color" && (
                       <div>
                         <div className={classes.allBoxesSize}>
-                          {attribute.items.map((attribute, index) => (
-                            <div
-                              className={classes.sizeBox}
-                              style={{
-                                backgroundColor: attribute.id,
-                              }}
-                            ></div>
-                          ))}
+                          <div className={classes.attributeTitle}>
+                            {attribute.title}
+                          </div>
+
+                          <div
+                            className={classes.sizeBox}
+                            style={{ backgroundColor: attribute.value }}
+                          >
+                            {attribute.value}
+                          </div>
                         </div>
                       </div>
                     )
                 )}
                 {this.props.item.attributes.map(
                   (attribute, index) =>
-                    attribute.name === "Size" && (
+                    attribute.title !== "Color" && (
                       <div>
                         <div className={classes.allBoxesSize}>
-                          {attribute.items.map((attribute, index) => (
-                            <div className={classes.sizeBox}>
-                              {attribute.displayValue}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )
-                )}
-                {this.props.item.attributes.map(
-                  (attribute, index) =>
-                    attribute.name === "Capacity" && (
-                      <div>
-                        <div className={classes.allBoxesSize}>
-                          {attribute.items.map((attribute, index) => (
-                            <div className={classes.sizeBox}>
-                              {attribute.displayValue}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )
-                )}
-                {this.props.item.attributes.map(
-                  (attribute, index) =>
-                    attribute.name === "With USB 3 ports" && (
-                      <div>
-                        <div className={classes.allBoxesSize}>
-                          {attribute.items.map((attribute, index) => (
-                            <div className={classes.sizeBox}>
-                              {attribute.displayValue}
-                            </div>
-                          ))}
+                          <div className={classes.attributeTitle}>
+                            {attribute.title}
+                          </div>
+                          <div className={classes.attributeTitle}>
+                            {attribute.value}
+                          </div>
                         </div>
                       </div>
                     )
@@ -87,7 +61,7 @@ class CartItem extends PureComponent {
           >
             +
           </button>
-          <div>{this.props.item.amount}</div>
+          <div className={classes.amount}>{this.props.item.amount}</div>
           <button
             className={classes.changeQuantityButton}
             onClick={this.props.onRemove}

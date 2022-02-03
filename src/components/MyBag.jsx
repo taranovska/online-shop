@@ -30,9 +30,11 @@ class MyBag extends PureComponent {
       this.props.currency + "" + this.context.totalAmount.toFixed(2);
 
     return (
-      <div className={classes.backdrop} onClick={this.props.change}>
+      <div className={classes.backdrop}>
         <div className={classes.myBagWrapper}>
-          <p className={classes.bagTitle}>My Bag, {numberOfCartItems} items</p>
+          <p className={classes.bagTitle}>
+            <span>My Bag,</span> {numberOfCartItems} items
+          </p>
 
           {this.context.items.map((item) => (
             <CartItem
@@ -51,7 +53,14 @@ class MyBag extends PureComponent {
             <Link to="/cart">
               <button className={classes.viewBagButton}>View Bag</button>
             </Link>
+
             <button className={classes.checkOutButton}>Check out</button>
+            <button
+              className={classes.viewBagButton}
+              onClick={this.props.change}
+            >
+              Close Bag
+            </button>
           </div>
         </div>
       </div>
