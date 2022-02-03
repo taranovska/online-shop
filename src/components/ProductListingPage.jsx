@@ -29,7 +29,6 @@ class ProductListingPage extends PureComponent {
   }
   render() {
     const { products } = this.state;
-    console.log(products);
 
     return products.map((product, index) => (
       <ProductItem

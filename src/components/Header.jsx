@@ -1,15 +1,13 @@
-import React, { Component } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import { PureComponent } from "react/cjs/react.production.min";
-import { allItems, client } from "../index";
-import { GET_ALL_CATEGORIES, GET_ALL_CURRENCIES } from "../query/items";
-
+import { client } from "../index";
 import CurrencySwitcher from "./CurrencySwitcher";
 import classes from "./Header.module.css";
 import MyBag from "./MyBag";
 import { connect } from "react-redux";
 import CartContext from "../store/cart-context";
-
+import { GET_ALL_CURRENCIES } from "../query/items";
 class Header extends PureComponent {
   constructor(props) {
     super(props);
@@ -61,8 +59,6 @@ class Header extends PureComponent {
       sum = sum + item.amount;
       return sum;
     });
-
-    console.log(this.context.items);
     const { currencies } = this.state;
 
     return (

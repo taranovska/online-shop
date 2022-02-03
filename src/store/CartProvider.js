@@ -5,6 +5,7 @@ import CartContext from "./cart-context";
 const defaultCartState = {
   items: [],
   totalAmount: 0,
+  selectedAttributes: [],
 };
 
 const cartReducer = (state, action) => {

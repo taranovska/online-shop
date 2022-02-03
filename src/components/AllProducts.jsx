@@ -1,11 +1,8 @@
 import React from "react";
-import { Component, PureComponent } from "react/cjs/react.production.min";
+import { PureComponent } from "react/cjs/react.production.min";
 import ProductItem from "./ProductItem";
-
 import { GET_ALL_ITEMS } from "../query/items";
 import { client } from "..";
-import { Routes, Route } from "react-router";
-import ProductDescriptionPage from "./ProductDescriptionPage";
 import CartContext from "../store/cart-context";
 
 class ProductListingPage extends PureComponent {
@@ -32,7 +29,6 @@ class ProductListingPage extends PureComponent {
   }
   render() {
     const { products } = this.state;
-    console.log(products);
 
     return products.map((product, index) => (
       <ProductItem

@@ -10,9 +10,7 @@ class Currency extends Component {
   }
   changeCurrencyHandler(event, currency) {
     const selectedCurrency = this.props.symbol;
-    // event.stopPropagation();
     this.props.changeCurrency(selectedCurrency);
-    console.log("cklicked");
   }
   render() {
     return (

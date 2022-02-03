@@ -1,8 +1,6 @@
 import React from "react";
-import { Component } from "react/cjs/react.development";
 import { PureComponent } from "react/cjs/react.production.min";
 import CartContext from "../store/cart-context";
-import CartProvider from "../store/CartProvider";
 import CartItem from "./CartItem";
 import classes from "./Cart.module.css";
 

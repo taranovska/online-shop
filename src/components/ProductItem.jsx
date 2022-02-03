@@ -1,11 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { PureComponent } from "react/cjs/react.production.min";
-import { client } from "..";
-import { GET_ALL_ITEMS } from "../query/items";
-import ProductDescriptionPage from "./ProductDescriptionPage";
 import classes from "./ProductItem.module.css";
-import { Routes, Route } from "react-router";
 import CartContext from "../store/cart-context";
 import { connect } from "react-redux";
 
@@ -36,10 +32,9 @@ class ProductItem extends PureComponent {
     const defaultCurrency = this.props.prices.find(
       (price) => price.currency.symbol === this.props.currency
     );
-    console.log(defaultCurrency);
     return (
       <React.Fragment>
-        <Link to={`/pdp/${this.props.keys}`}>
+        <Link to={`/pdp/${this.props.keys}`} className={classes.links}>
           <div className={classes.productCard} key={this.props.keys}>
             <div className={classes.mainImg}>
               <img src={this.props.img} alt="" />

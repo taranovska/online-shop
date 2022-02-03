@@ -1,13 +1,11 @@
-import React, { useContext } from "react";
-import CartContext, { state } from "../store/cart-context";
+import React, { useContext, useState } from "react";
+import CartContext from "../store/cart-context";
 import classes from "./ProductDescriptionPage.module.css";
 import { useParams } from "react-router-dom";
-
 import { connect } from "react-redux";
 
 const ProductDescriptionPage = (props) => {
   const params = useParams();
-  console.log(params.productId);
   const context = useContext(CartContext);
   const currentProduct = props.allItems.find(
     (product) => product.id === params.productId
@@ -15,6 +13,18 @@ const ProductDescriptionPage = (props) => {
   const defaultCurrency = currentProduct.prices.find(
     (curSymbol) => curSymbol.currency.symbol === props.currency
   );
+
+  let selectedAttributes = [];
+  console.log(typeof selectedAttributes);
+  currentProduct.attributes.map((attribute) =>
+    selectedAttributes.push({
+      value: attribute.items[0].displayValue,
+      title: attribute.name,
+    })
+  );
+
+  const [selectedAttribute, setSelectedAttributes] =
+    useState(selectedAttributes);
 
   const addToCartButtonHandler = (e) => {
     const enteredAmountNumber = 1;
@@ -43,14 +53,45 @@ const ProductDescriptionPage = (props) => {
         <p>{currentProduct.name}</p>
 
         <div>
+          {/* {currentProduct.attributes.map(
+            (attribute, index) =>
+              attribute.name === "Color" && (
+                <div>
+                  <div>Select {attribute.name}: </div>
+                  <div className={classes.allBoxesSize}>
+                    {attribute.items.map((attribute, index) => (
+                      <div
+                        // onClick={() =>
+                        //   setSelectedAttributes({
+                        //     title: attribute.name,
+                        //     value: attribute.displayValue,
+                        //   })
+                        // }
+                        className={classes.sizeBox}
+                        style={{
+                          backgroundColor: attribute.id,
+                        }}
+                      ></div>
+                    ))}
+                  </div>
+                </div>
+              )
+          )} */}
           {currentProduct.attributes.map(
             (attribute, index) =>
               attribute.name === "Color" && (
                 <div>
-                  <div>{attribute.name}</div>
+                  <div>Select {attribute.name}: </div>
                   <div className={classes.allBoxesSize}>
+                    <select></select>
                     {attribute.items.map((attribute, index) => (
                       <div
+                        // onClick={() =>
+                        //   setSelectedAttributes({
+                        //     title: attribute.name,
+                        //     value: attribute.displayValue,
+                        //   })
+                        // }
                         className={classes.sizeBox}
                         style={{
                           backgroundColor: attribute.id,
@@ -65,10 +106,18 @@ const ProductDescriptionPage = (props) => {
             (attribute, index) =>
               attribute.name === "Size" && (
                 <div>
-                  <div>{attribute.name}</div>
+                  <div>Select {attribute.name}:</div>
                   <div className={classes.allBoxesSize}>
                     {attribute.items.map((attribute, index) => (
-                      <div className={classes.sizeBox}>
+                      <div
+                        className={classes.sizeBox}
+                        // onClick={() =>
+                        //   setSelectedAttributes({
+                        //     title: attribute.name,
+                        //     value: attribute.displayValue,
+                        //   })
+                        // }
+                      >
                         {attribute.displayValue}
                       </div>
                     ))}
@@ -80,10 +129,18 @@ const ProductDescriptionPage = (props) => {
             (attribute, index) =>
               attribute.name === "Capacity" && (
                 <div>
-                  <div>{attribute.name}</div>
+                  <div>Select {attribute.name}:</div>
                   <div className={classes.allBoxesSize}>
                     {attribute.items.map((attribute, index) => (
-                      <div className={classes.sizeBox}>
+                      <div
+                        className={classes.sizeBox}
+                        // onClick={() =>
+                        //   setSelectedAttributes({
+                        //     title: attribute.name,
+                        //     value: attribute.displayValue,
+                        //   })
+                        // }
+                      >
                         {attribute.displayValue}
                       </div>
                     ))}
@@ -95,10 +152,18 @@ const ProductDescriptionPage = (props) => {
             (attribute, index) =>
               attribute.name === "With USB 3 ports" && (
                 <div>
-                  <div>{attribute.name}</div>
+                  <div>Select {attribute.name}:</div>
                   <div className={classes.allBoxesSize}>
                     {attribute.items.map((attribute, index) => (
-                      <div className={classes.sizeBox}>
+                      <div
+                      // className={classes.sizeBox}
+                      // onClick={() =>
+                      //   setSelectedAttributes({
+                      //     title: attribute.name,
+                      //     value: attribute.displayValue,
+                      //   })
+                      // }
+                      >
                         {attribute.displayValue}
                       </div>
                     ))}

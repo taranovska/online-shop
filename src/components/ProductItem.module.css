@@ -12,6 +12,7 @@
 }
 .bucket {
   visibility: hidden;
+  text-align: center;
 }
 .productCard:hover > .bucket {
   visibility: visible;
