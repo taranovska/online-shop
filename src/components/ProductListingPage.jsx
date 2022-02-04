@@ -28,9 +28,9 @@ class ProductListingPage extends PureComponent {
         });
       });
   }
+
   render() {
     const { products } = this.state;
-
     return (
       <div>
         <p className={classes.categoryName}>{this.props.route}</p>

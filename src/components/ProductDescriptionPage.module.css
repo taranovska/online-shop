@@ -5,10 +5,12 @@
   grid-template-columns: 80px 610px 300px;
   grid-template-rows: auto;
 }
+
 .smallImages img {
   width: 80px;
   height: 79px;
 }
+
 .addToCartButton {
   font-family: Raleway;
   font-weight: 600;
@@ -22,14 +24,17 @@
   color: white;
   background: #5ece7b;
 }
+
 .productDetails {
   text-align: left;
 }
+
 .mainImage img {
   width: 610px;
   height: 511px;
   object-fit: cover;
 }
+
 .sizeBox {
   width: 63px;
   height: 45px;
@@ -41,18 +46,22 @@
   color: #1d1f22;
   box-sizing: border-box;
 }
+
 .selected {
   background: #1d1f22;
   border: 1px solid #1d1f22;
   color: white;
 }
+
 .sizeBoxUnavailable {
   border: 1px solid #a6a6a6;
   color: #a6a6a6;
 }
+
 .allBoxesSize {
   display: flex;
 }
+
 .description {
   font-family: Roboto;
   font-weight: 400;
@@ -60,6 +69,7 @@
   line-height: 159.96%;
   color: #1d1f22;
 }
+
 .price {
   font-family: Raleway;
   font-style: normal;
@@ -69,6 +79,7 @@
   align-items: center;
   color: #1d1f22;
 }
+
 .titleDescription {
   font-family: Roboto Condensed;
   font-weight: 700;
@@ -76,6 +87,7 @@
   color: #1d1f22;
   margin-bottom: 10px;
 }
+
 .options {
   font-family: Source Sans Pro;
   font-weight: 400;
@@ -85,9 +97,11 @@
   letter-spacing: 0.05em;
   color: #292929;
 }
+
 select {
   margin-bottom: 10px;
 }
+
 .productName {
   font-family: Raleway;
   font-weight: 600;

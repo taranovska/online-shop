@@ -8,10 +8,12 @@ class Currency extends Component {
     super(props);
     this.changeCurrencyHandler = this.changeCurrencyHandler.bind(this);
   }
+
   changeCurrencyHandler(event, currency) {
     const selectedCurrency = this.props.symbol;
     this.props.changeCurrency(selectedCurrency);
   }
+
   render() {
     return (
       <div className={classes.currency} onClick={this.changeCurrencyHandler}>
@@ -20,14 +22,17 @@ class Currency extends Component {
     );
   }
 }
+
 const mapStateToProps = (state) => {
   return {
     currency: state.currency,
   };
 };
+
 const mapDispatchToProps = (dispatch) => {
   return {
     changeCurrency: (cur) => dispatch({ type: "changeCurrency", payload: cur }),
   };
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(Currency);

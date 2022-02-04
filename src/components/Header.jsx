@@ -17,6 +17,7 @@ class Header extends PureComponent {
       changeArrow: "M1 0.5L4 3.5L7 0.5",
       currencies: [],
     };
+
     this.setShowMyBag = this.setShowMyBag.bind(this);
     this.setCloseMyBag = this.setCloseMyBag.bind(this);
     this.setShowCurrencyList = this.setShowCurrencyList.bind(this);
@@ -34,6 +35,7 @@ class Header extends PureComponent {
         });
       });
   }
+
   setShowMyBag() {
     this.setState({ showMyBag: true });
     console.log(this.state);
@@ -44,14 +46,17 @@ class Header extends PureComponent {
   setCloseMyBag() {
     this.setState({ showMyBag: false });
   }
+
   setShowCurrencyList() {
     this.setState({ showCurrencyList: true });
     this.setState({ changeArrow: "M1 3.5L4 0.5L7 3.5" });
   }
+
   setCloseCurrencyList() {
     this.setState({ showCurrencyList: false });
     this.setState({ changeArrow: "M1 0.5L4 3.5L7 0.5" });
   }
+
   static contextType = CartContext;
   render() {
     const quantityOfItems = this.context.items.map((item) => {
@@ -59,10 +64,10 @@ class Header extends PureComponent {
       sum = sum + item.amount;
       return sum;
     });
+
     let result = quantityOfItems.reduce(function (sum, elem) {
       return sum + elem;
     }, 0);
-    const { currencies } = this.state;
 
     return (
       <div className={classes.wrapper}>
@@ -129,10 +134,8 @@ class Header extends PureComponent {
               </defs>
             </svg>
           </div>
-
           <div className={classes.currency_cart}>
             <div className={classes.selected_currency}></div>
-
             {this.props.currency}
             <div
               className={classes.arrow_up}
@@ -207,6 +210,7 @@ const mapStateToProps = (state) => {
     currency: state.currency,
   };
 };
+
 const mapDispatchToProps = (dispatch) => {
   return {
     changeCurrency: () => dispatch({ type: "changeCurrency" }),

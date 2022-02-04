@@ -4,10 +4,9 @@ import Currency from "./Currency";
 import classes from "./CurrencySwitcher.module.css";
 class CurrencySwitcher extends PureComponent {
   constructor(props) {
-    super(props);
+    super();
   }
-
-
+  
   render() {
     const classesCurrency = classes.currencySwitcher + " " + classes.backdrop;
 

@@ -11,10 +11,8 @@
 
 .backdrop {
   position: absolute;
-
   left: 914px;
   top: 65px;
   text-align: left;
-
   z-index: 10;
 }

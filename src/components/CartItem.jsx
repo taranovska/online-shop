@@ -76,7 +76,6 @@ class CartItem extends PureComponent {
         </div>
       </div>
     );
-    // );
   }
 }
 

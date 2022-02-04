@@ -7,6 +7,7 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .wrapper {
   width: 1200px;
   display: flex;
@@ -24,6 +25,7 @@
   padding: 4px 16px 32px 16px;
   color: #1d1f22;
 }
+
 .links:hover {
   color: #5ece7b;
   border-bottom: 2px solid #5ece7b;
@@ -33,15 +35,19 @@
   color: #1d1f22;
   text-decoration: none;
 }
+
 .currency_cart {
   display: flex;
 }
+
 .selected_currency {
   padding-right: 15px;
 }
+
 .myBag {
   position: relative;
 }
+
 .myBagBadge {
   color: white;
   height: 20px;

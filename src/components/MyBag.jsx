@@ -17,6 +17,7 @@ class MyBag extends PureComponent {
   cartItemAddHandler(item) {
     this.context.addItem({ ...item, amount: 1 });
   }
+
   cartItemRemoveHandler(id) {
     this.context.removeItem(id);
   }
@@ -35,7 +36,6 @@ class MyBag extends PureComponent {
           <p className={classes.bagTitle}>
             <span>My Bag,</span> {numberOfCartItems} items
           </p>
-
           {this.context.items.map((item) => (
             <CartItem
               item={item}
@@ -44,7 +44,6 @@ class MyBag extends PureComponent {
               onRemove={this.cartItemRemoveHandler.bind(null, item.id)}
             ></CartItem>
           ))}
-
           <div className={classes.total}>
             <div>Total</div>
             <div>{totalAmount}</div>
@@ -53,7 +52,6 @@ class MyBag extends PureComponent {
             <Link to="/cart">
               <button className={classes.viewBagButton}>View Bag</button>
             </Link>
-
             <button className={classes.checkOutButton}>Check out</button>
             <button
               className={classes.viewBagButton}

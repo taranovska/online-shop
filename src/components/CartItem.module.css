@@ -6,6 +6,7 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .cardItemDetail {
   display: flex;
   flex-direction: column;
@@ -23,19 +24,23 @@
   padding: 8px 12px;
   background-color: white;
 }
+
 .changeQuantityButton {
   border: 1px solid #1d1f22;
   box-sizing: border-box;
   background-color: white;
 }
+
 .sizes {
   margin-right: 8px;
   border: none;
 }
+
 .itemImg img {
   width: 105px;
   height: 137px;
 }
+
 .sizeBox {
   width: 63px;
   height: 45px;
@@ -57,6 +62,7 @@
   display: flex;
   margin-bottom: 20px;
 }
+
 .attribute {
   font-family: Raleway;
   font-weight: 300;
@@ -64,11 +70,13 @@
   line-height: 160%;
   color: #1d1f22;
 }
+
 .sizeBox:hover {
   background: #1d1f22;
   border: 1px solid #1d1f22;
   color: white;
 }
+
 .amount {
   text-align: center !important;
   font-family: Raleway;
@@ -78,6 +86,7 @@
   text-align: right;
   color: #1d1f22;
 }
+
 .attributeTitle {
   font-family: Raleway;
   font-weight: 300;

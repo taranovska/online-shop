@@ -20,7 +20,6 @@ const ProductDescriptionPage = (props) => {
       value: attribute.items[0].displayValue,
     })
   );
-  let allAttributes = [...defaultAttributes];
   const [attribute, setAttribute] = useState(defaultAttributes);
 
   const handleChange = (e) => {
@@ -55,7 +54,6 @@ const ProductDescriptionPage = (props) => {
       </div>
       <div className={classes.productDetails}>
         <p className={classes.productName}>{currentProduct.name}</p>
-
         <div>
           {currentProduct.attributes.map(
             (attribute, index) =>

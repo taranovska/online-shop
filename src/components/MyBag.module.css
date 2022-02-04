@@ -2,7 +2,6 @@
 
 .myBagWrapper {
   background: #ffffff;
-
   padding: 20px;
   padding-left: 16px;
   position: absolute;
@@ -26,6 +25,7 @@
   line-height: 160%;
   color: #1d1f22;
 }
+
 .total,
 .detailButton {
   display: flex;
@@ -35,7 +35,9 @@
   font-size: 16px;
   line-height: 18px;
   color: #1d1f22;
+  margin-top: 20px;
 }
+
 .viewBagButton {
   width: 140px;
   height: 43px;
@@ -50,6 +52,7 @@
   color: #1d1f22;
   margin-right: 10px;
 }
+
 .checkOutButton {
   width: 142px;
   height: 65px;
@@ -75,6 +78,7 @@
   z-index: 10;
   background: rgba(57, 55, 72, 0.22);
 }
+
 span {
   font-family: Raleway;
   font-weight: 700;
