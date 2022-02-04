@@ -46,11 +46,11 @@ const ProductDescriptionPage = (props) => {
     <div className={classes.wrapper}>
       <div className={classes.smallImages}>
         {currentProduct.gallery.map((productImg, index) => (
-          <img src={productImg} key={index++}></img>
+          <img src={productImg} key={index++} alt=""></img>
         ))}
       </div>
       <div className={classes.mainImage}>
-        <img src={currentProduct.gallery[0]}></img>
+        <img src={currentProduct.gallery[0]} alt=""></img>
       </div>
       <div className={classes.productDetails}>
         <p className={classes.productName}>{currentProduct.name}</p>
@@ -71,7 +71,6 @@ const ProductDescriptionPage = (props) => {
                       <option
                         className={classes.options}
                         value={attribute.displayValue}
-                        className={classes.sizeBox}
                       >
                         {attribute.displayValue}
                       </option>
@@ -96,7 +95,6 @@ const ProductDescriptionPage = (props) => {
                       <option
                         className={classes.options}
                         value={attribute.displayValue}
-                        className={classes.sizeBox}
                         style={{
                           backgroundColor: attribute.id,
                         }}
