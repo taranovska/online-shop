@@ -30,9 +30,11 @@
 }
 
 .mainImage img {
-  width: 610px;
+  width: 590px;
   height: 511px;
   object-fit: cover;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 
 .sizeBox {
@@ -89,13 +91,21 @@
 }
 
 .options {
+  width: 63px;
+  height: 45px;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #1d1f22;
+  color: #1d1f22;
+  box-sizing: border-box;
   font-family: Source Sans Pro;
   font-weight: 400;
   font-size: 16px;
   line-height: 18px;
   text-align: center;
   letter-spacing: 0.05em;
-  color: #292929;
 }
 
 select {
