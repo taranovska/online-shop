@@ -22,10 +22,26 @@
   visibility: visible;
 }
 
-.mainImg img {
+.mainImg {
   object-fit: cover;
   width: 354px;
   height: 330px;
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  color: #8d8f9a;
+  text-transform: uppercase;
+}
+.opacity {
+  opacity: 0.5;
 }
 
 .title {

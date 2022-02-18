@@ -9,36 +9,32 @@ import classes from "./ProductListingPage.module.css";
 class ProductListingPage extends PureComponent {
   constructor(props) {
     super(props);
+    this.getItems = this.getItems.bind(this);
     this.state = {
       products: [],
     };
   }
+
+  getItems = () => {
+    client
+      .query({
+        query: GET_ALL_ITEMS,
+      })
+      .then((result) => {
+        this.setState({
+          products: result.data.categories.find(
+            (category) => category.name === this.props.route
+          ).products,
+        });
+      });
+  };
+
   static contextType = CartContext;
   componentDidMount() {
-    client
-      .query({
-        query: GET_ALL_ITEMS,
-      })
-      .then((result) => {
-        this.setState({
-          products: result.data.categories.find(
-            (category) => category.name === this.props.route
-          ).products,
-        });
-      });
+    this.getItems();
   }
   componentDidUpdate() {
-    client
-      .query({
-        query: GET_ALL_ITEMS,
-      })
-      .then((result) => {
-        this.setState({
-          products: result.data.categories.find(
-            (category) => category.name === this.props.route
-          ).products,
-        });
-      });
+    this.getItems();
   }
 
   render() {
@@ -46,16 +42,19 @@ class ProductListingPage extends PureComponent {
     return (
       <div>
         <p className={classes.categoryName}>{this.props.route}</p>
-        {products.map((product, index) => (
-          <ProductItem
-            key={product.id}
-            keys={product.id}
-            img={product.gallery[0]}
-            title={product.name}
-            prices={product.prices}
-            attributes={product.attributes}
-          ></ProductItem>
-        ))}
+        <div>
+          {products.map((product, index) => (
+            <ProductItem
+              key={product.id}
+              keys={product.id}
+              img={product.gallery[0]}
+              title={product.name}
+              prices={product.prices}
+              attributes={product.attributes}
+              inStock={product.inStock}
+            ></ProductItem>
+          ))}
+        </div>
       </div>
     );
   }

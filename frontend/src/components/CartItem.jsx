@@ -24,7 +24,6 @@ class CartItem extends PureComponent {
                           <div className={classes.attributeTitle}>
                             {attribute.title}
                           </div>
-
                           <div
                             className={classes.sizeBox}
                             style={{ backgroundColor: attribute.value }}

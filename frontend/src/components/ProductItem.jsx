@@ -32,12 +32,26 @@ class ProductItem extends PureComponent {
     const defaultCurrency = this.props.prices.find(
       (price) => price.currency.symbol === this.props.currency
     );
+    const image = this.props.img;
+    const { inStock } = this.props;
+
+    const imgBox = inStock
+      ? `${classes.mainImg}`
+      : `${classes.mainImg} ${classes.opacity}`;
+
     return (
       <React.Fragment>
         <Link to={`/pdp/${this.props.keys}`} className={classes.links}>
           <div className={classes.productCard} key={this.props.keys}>
-            <div className={classes.mainImg}>
-              <img src={this.props.img} alt="" />
+            <div
+              className={imgBox}
+              style={{
+                backgroundImage: `url(${image})`,
+                backgroundPosition: "center",
+                backgroundSize: "cover",
+              }}
+            >
+              {inStock === false ? <div>Out of Stock</div> : null}
             </div>
             <div className={classes.title}>{this.props.title}</div>
             <div className={classes.price}>

@@ -38,6 +38,7 @@ class ProductListingPage extends PureComponent {
         title={product.name}
         prices={product.prices}
         attributes={product.attributes}
+        inStock={product.inStock}
       ></ProductItem>
     ));
   }
