@@ -14,8 +14,7 @@ class ProductListingPage extends PureComponent {
     };
   }
   static contextType = CartContext;
-
-  componentDidUpdate() {
+  componentDidMount() {
     client
       .query({
         query: GET_ALL_ITEMS,

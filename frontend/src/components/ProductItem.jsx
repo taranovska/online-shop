@@ -41,7 +41,8 @@ class ProductItem extends PureComponent {
             </div>
             <div className={classes.title}>{this.props.title}</div>
             <div className={classes.price}>
-              {defaultCurrency.currency.symbol + defaultCurrency.amount}
+              {defaultCurrency.currency.symbol +
+                defaultCurrency.amount.toFixed(2)}
             </div>
             <div
               className={classes.bucket}
