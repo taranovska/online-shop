@@ -27,6 +27,19 @@ class ProductListingPage extends PureComponent {
         });
       });
   }
+  componentDidUpdate() {
+    client
+      .query({
+        query: GET_ALL_ITEMS,
+      })
+      .then((result) => {
+        this.setState({
+          products: result.data.categories.find(
+            (category) => category.name === this.props.route
+          ).products,
+        });
+      });
+  }
 
   render() {
     const { products } = this.state;
