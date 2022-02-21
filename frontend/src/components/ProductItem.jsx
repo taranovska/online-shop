@@ -21,8 +21,9 @@ class ProductItem extends PureComponent {
       id: this.props.keys,
       name: this.props.title,
       amount: enteredAmountNumber,
-      price: defaultCurrency.currency.symbol + defaultCurrency.amount,
-      priceWithOutSymbol: defaultCurrency.amount,
+      price: this.props.prices.find(
+        (curr) => curr.currency.symbol === defaultCurrency
+      ),
       attributes: this.props.attributes,
       img: this.props.img,
     });

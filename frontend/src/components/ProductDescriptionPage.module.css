@@ -6,7 +6,7 @@
   grid-template-rows: auto;
 }
 
-.smallImages img {
+.smallImages {
   width: 80px;
   height: 79px;
 }
@@ -29,12 +29,23 @@
   text-align: left;
 }
 
-.mainImage img {
+.mainImage {
   width: 590px;
   height: 511px;
   object-fit: cover;
   padding-right: 10px;
   padding-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  color: #8d8f9a;
+  text-transform: uppercase;
 }
 
 .sizeBox {
@@ -119,4 +130,13 @@ select {
   line-height: 27px;
   align-items: center;
   color: #1d1f22;
+}
+button:disabled,
+button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+.opacity {
+  opacity: 0.5;
 }

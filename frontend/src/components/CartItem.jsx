@@ -1,18 +1,32 @@
 import React from "react";
-import { PureComponent } from "react/cjs/react.development";
+import { connect } from "react-redux";
+import { Component } from "react/cjs/react.development";
 import classes from "./CartItem.module.css";
 
-class CartItem extends PureComponent {
+class CartItem extends Component {
   constructor(props) {
     super();
   }
 
   render() {
+    const defaultCurrency = this.props.currency;
+    // const price = this.props.item.price;
+    // console.log(price);
+
+    const pricesOfItem = this.props.item.price;
+    console.log(pricesOfItem);
+    const currentPrice = pricesOfItem.find(
+      (curr) => curr.currency.symbol === defaultCurrency
+    );
+    console.log(currentPrice);
+
     return (
       <div className={classes.cardItem}>
         <div className={classes.cardItemDetail}>
           <div>{this.props.item.name}</div>
-          <div>{this.props.item.price}</div>
+          <div>
+            {defaultCurrency} {currentPrice.amount}
+          </div>
           <div className={classes.sizesBox}>
             <div className={classes.sizes}>
               <div>
@@ -77,5 +91,10 @@ class CartItem extends PureComponent {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    currency: state.currency,
+  };
+};
 
-export default CartItem;
+export default connect(mapStateToProps)(CartItem);

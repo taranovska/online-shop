@@ -3,16 +3,20 @@ import CartContext from "../store/cart-context";
 import classes from "./ProductDescriptionPage.module.css";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
+import parse from "html-react-parser";
 
 const ProductDescriptionPage = (props) => {
   const params = useParams();
   const context = useContext(CartContext);
+
   const currentProduct = props.allItems.find(
     (product) => product.id === params.productId
   );
+  console.log(currentProduct);
   const defaultCurrency = currentProduct.prices.find(
     (curSymbol) => curSymbol.currency.symbol === props.currency
   );
+  const inStock = currentProduct.inStock;
   let defaultAttributes = [];
   currentProduct.attributes.map((attribute) =>
     defaultAttributes.push({
@@ -28,6 +32,8 @@ const ProductDescriptionPage = (props) => {
       value: e.target.value,
     });
   };
+  const price = currentProduct.prices;
+  console.log(price);
 
   const addToCartButtonHandler = (e) => {
     const enteredAmountNumber = 1;
@@ -35,22 +41,46 @@ const ProductDescriptionPage = (props) => {
       id: params.productId,
       name: currentProduct.name,
       amount: enteredAmountNumber,
-      price: defaultCurrency.currency.symbol + defaultCurrency.amount,
-      priceWithOutSymbol: defaultCurrency.amount,
+      price: price,
+
+      // .find(
+      //   (curr) => curr.currency.symbol === defaultCurrency
+      // ),
       attributes: attribute,
       img: currentProduct.gallery[0],
     });
   };
+  const image = currentProduct.gallery[0];
+
+  const mainImage = inStock
+    ? `${classes.mainImage}`
+    : `${classes.mainImage} ${classes.opacity}`;
+  const smallImages = inStock
+    ? `${classes.smallImages}`
+    : `${classes.smallImages} ${classes.opacity}`;
 
   return (
     <div className={classes.wrapper}>
-      <div className={classes.smallImages}>
+      <div>
         {currentProduct.gallery.map((productImg, index) => (
-          <img src={productImg} key={index++} alt=""></img>
+          <img
+            className={smallImages}
+            src={productImg}
+            key={index++}
+            alt=""
+          ></img>
         ))}
       </div>
-      <div className={classes.mainImage}>
-        <img src={currentProduct.gallery[0]} alt=""></img>
+      <div
+        className={mainImage}
+        style={{
+          backgroundImage: `url(${image})`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
+      >
+        {" "}
+        {inStock === false ? <div>Out of Stock</div> : null}
       </div>
       <div className={classes.productDetails}>
         <p className={classes.productName}>{currentProduct.name}</p>
@@ -117,15 +147,14 @@ const ProductDescriptionPage = (props) => {
           <button
             className={classes.addToCartButton}
             onClick={addToCartButtonHandler}
+            disabled={!inStock}
           >
             ADD TO CART
           </button>
         </div>
 
-        <div
-          dangerouslySetInnerHTML={{ __html: currentProduct.description }}
-          className={classes.description}
-        />
+        <div className={classes.description} />
+        {parse(currentProduct.description)}
       </div>
     </div>
   );
