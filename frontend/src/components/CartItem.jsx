@@ -10,15 +10,10 @@ class CartItem extends Component {
 
   render() {
     const defaultCurrency = this.props.currency;
-    // const price = this.props.item.price;
-    // console.log(price);
-
-    const pricesOfItem = this.props.item.price;
-    console.log(pricesOfItem);
+    const pricesOfItem = this.props.item.prices;
     const currentPrice = pricesOfItem.find(
       (curr) => curr.currency.symbol === defaultCurrency
     );
-    console.log(currentPrice);
 
     return (
       <div className={classes.cardItem}>

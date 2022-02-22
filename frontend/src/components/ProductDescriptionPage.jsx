@@ -12,7 +12,6 @@ const ProductDescriptionPage = (props) => {
   const currentProduct = props.allItems.find(
     (product) => product.id === params.productId
   );
-  console.log(currentProduct);
   const defaultCurrency = currentProduct.prices.find(
     (curSymbol) => curSymbol.currency.symbol === props.currency
   );
@@ -33,7 +32,6 @@ const ProductDescriptionPage = (props) => {
     });
   };
   const price = currentProduct.prices;
-  console.log(price);
 
   const addToCartButtonHandler = (e) => {
     const enteredAmountNumber = 1;
@@ -41,13 +39,10 @@ const ProductDescriptionPage = (props) => {
       id: params.productId,
       name: currentProduct.name,
       amount: enteredAmountNumber,
-      price: price,
-
-      // .find(
-      //   (curr) => curr.currency.symbol === defaultCurrency
-      // ),
+      prices: price,
       attributes: attribute,
       img: currentProduct.gallery[0],
+      currency: defaultCurrency.currency.symbol,
     });
   };
   const image = currentProduct.gallery[0];

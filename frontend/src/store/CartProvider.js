@@ -1,17 +1,21 @@
-import { useReducer } from "react";
+import { useReducer, useState } from "react";
 import CartContext from "./cart-context";
 
 const defaultCartState = {
   items: [],
   totalAmount: 0,
+  currency: "$",
   selectedAttributes: [],
 };
 
 const cartReducer = (state, action) => {
   if (action.type === "ADD") {
+    const price = action.item.prices.filter(
+      (price) => price.currency.symbol === action.item.currency
+    );
     const updatedTotalAmount = +(
       state.totalAmount +
-      action.item.priceWithOutSymbol * action.item.amount
+      price[0].amount * action.item.amount
     );
     const existingCartItemIndex = state.items.findIndex(
       (item) => item.id === action.item.id
@@ -41,6 +45,7 @@ const cartReducer = (state, action) => {
       (item) => item.id === action.id
     );
     const existingItem = state.items[existingCartItemIndex];
+
     const updatedTotalAmount =
       state.totalAmount - existingItem.priceWithOutSymbol;
     let updatedItems;
@@ -56,6 +61,61 @@ const cartReducer = (state, action) => {
       totalAmount: updatedTotalAmount,
     };
   }
+  if (action.type === "CHANGE_CURRENCY") {
+    console.log("changing");
+    console.log(state);
+    const updatedCurrency = action.currency.currency;
+    console.log(updatedCurrency);
+
+    const newTotal = state.items
+      .map((element) => {
+        console.log(element);
+        const price = element.prices.find(
+          (price) => price.currency.symbol === updatedCurrency
+        ).amount;
+        const amount = element.amount;
+        return price * amount;
+      })
+      .reduce((previousValue, currentValue) => {
+        return previousValue + currentValue;
+      });
+    console.log(newTotal);
+
+    return {
+      ...state,
+      currency: updatedCurrency,
+      totalAmount: newTotal,
+    };
+    // const price = action.item.prices.filter(
+    //   (price) => price.currency.symbol === action.item.currency
+    // );
+    // const updatedTotalAmount = +(
+    //   state.totalAmount +
+    //   price[0].amount * action.item.amount
+    // );
+    // const existingCartItemIndex = state.items.findIndex(
+    //   (item) => item.id === action.item.id
+    // );
+    // const existingCartItem = state.items[existingCartItemIndex];
+
+    // let updatedItems;
+
+    // if (existingCartItem) {
+    //   const updatedItem = {
+    //     ...existingCartItem,
+    //     amount: existingCartItem.amount + action.item.amount,
+    //   };
+    //   updatedItems = [...state.items];
+    //   updatedItems[existingCartItemIndex] = updatedItem;
+    // } else {
+    //   updatedItems = state.items.concat(action.item);
+    // }
+    // return {
+    //   items: updatedItems,
+    //   totalAmount: updatedTotalAmount,
+    // };
+  }
+
   return defaultCartState;
 };
 
@@ -70,12 +130,17 @@ const CartProvider = (props) => {
   const removeItemFromCartHandler = (id) => {
     dispatchCartAction({ type: "REMOVE", id: id });
   };
+  const changingCurrencyHandler = (currency) => {
+    dispatchCartAction({ type: "CHANGE_CURRENCY", currency: currency });
+  };
 
   const cartContext = {
     items: cartState.items,
+    currency: cartState.currency,
     totalAmount: cartState.totalAmount,
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
+    changingCurrency: changingCurrencyHandler,
   };
 
   return (
