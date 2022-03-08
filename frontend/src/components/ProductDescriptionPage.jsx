@@ -21,15 +21,25 @@ const ProductDescriptionPage = (props) => {
     defaultAttributes.push({
       title: attribute.name,
       value: attribute.items[0].displayValue,
+      selected: true,
     })
   );
-  const [attribute, setAttribute] = useState(defaultAttributes);
 
+  const [attributes, setAttributes] = useState(defaultAttributes);
+  console.log(currentProduct.attributes);
   const handleChange = (e) => {
-    setAttribute({
-      title: e.target.dataset.label,
-      value: e.target.value,
-    });
+    let title = e.target.dataset.label;
+    let value = e.target.value;
+
+    let currAttribute = { title, value };
+
+    const newArrAttribute = attributes.find(
+      (attribute) => attribute.title === title
+    );
+    setSelected(true);
+    newArrAttribute.value = value;
+    setAttributes([...attributes]);
+    return attributes;
   };
   const price = currentProduct.prices;
 
@@ -40,12 +50,13 @@ const ProductDescriptionPage = (props) => {
       name: currentProduct.name,
       amount: enteredAmountNumber,
       prices: price,
-      attributes: attribute,
+      attributes: attributes,
+      allAttributes: currentProduct.attributes,
       img: currentProduct.gallery[0],
       currency: defaultCurrency.currency.symbol,
     });
   };
-  const image = currentProduct.gallery[0];
+  const [image, setImage] = useState(currentProduct.gallery[0]);
 
   const mainImage = inStock
     ? `${classes.mainImage}`
@@ -54,6 +65,15 @@ const ProductDescriptionPage = (props) => {
     ? `${classes.smallImages}`
     : `${classes.smallImages} ${classes.opacity}`;
 
+  const isSelected = (el, el2) => {
+    const currentAttr = attributes.find((attr) => attr.title === el2);
+    if (currentAttr.value === el) return true;
+    else return false;
+  };
+
+  const [selected, setSelected] = useState(false);
+  console.log(attributes);
+
   return (
     <div className={classes.wrapper}>
       <div>
@@ -61,8 +81,9 @@ const ProductDescriptionPage = (props) => {
           <img
             className={smallImages}
             src={productImg}
+            onClick={() => setImage(currentProduct.gallery[index])}
             key={index++}
-            alt=""
+            alt="small itemImage"
           ></img>
         ))}
       </div>
@@ -74,7 +95,6 @@ const ProductDescriptionPage = (props) => {
           backgroundSize: "cover",
         }}
       >
-        {" "}
         {inStock === false ? <div>Out of Stock</div> : null}
       </div>
       <div className={classes.productDetails}>
@@ -82,52 +102,136 @@ const ProductDescriptionPage = (props) => {
         <div>
           {currentProduct.attributes.map(
             (attribute, index) =>
-              attribute.name !== "Color" && (
-                <div>
+              attribute.name === "Size" && (
+                <div key={index}>
                   <div className={classes.titleDescription}>
-                    Select {attribute.name}:{" "}
-                  </div>
-                  <select
-                    data-label={attribute.name}
-                    className={classes.allBoxesSize}
-                    onChange={handleChange}
-                  >
+                    Select {attribute.name}
                     {attribute.items.map((attribute, index) => (
-                      <option
-                        className={classes.options}
+                      <button
+                        key={index}
+                        className={
+                          isSelected(attribute.displayValue, "Size")
+                            ? `${classes.options} ${classes.active}`
+                            : `${classes.options}`
+                        }
                         value={attribute.displayValue}
+                        onClick={handleChange}
+                        data-label="Size"
+                        style={
+                          isSelected(attribute.displayValue, "Size")
+                            ? {
+                                background: "#1d1f22",
+                                color: "white",
+                              }
+                            : null
+                        }
                       >
                         {attribute.displayValue}
-                      </option>
+                      </button>
                     ))}
-                  </select>
+                  </div>
                 </div>
               )
           )}
           {currentProduct.attributes.map(
             (attribute, index) =>
               attribute.name === "Color" && (
-                <div>
+                <div key={index}>
                   <div className={classes.titleDescription}>
-                    Select {attribute.name}:{" "}
-                  </div>
-                  <select
-                    data-label={attribute.name}
-                    className={classes.allBoxesSize}
-                    onChange={handleChange}
-                  >
+                    Select {attribute.name}
                     {attribute.items.map((attribute, index) => (
-                      <option
-                        className={classes.options}
+                      <button
+                        key={index}
+                        className={
+                          isSelected(attribute.displayValue, "Color")
+                            ? `${classes.options} ${classes.border}`
+                            : `${classes.options}`
+                        }
                         value={attribute.displayValue}
-                        style={{
-                          backgroundColor: attribute.id,
-                        }}
+                        onClick={handleChange}
+                        data-label="Color"
+                        style={{ background: `${attribute.displayValue}` }}
+                      ></button>
+                    ))}
+                  </div>
+                </div>
+              )
+          )}
+          {currentProduct.attributes.map(
+            (attribute, index) =>
+              attribute.name === "Capacity" && (
+                <div key={index}>
+                  <div className={classes.titleDescription}>
+                    Select {attribute.name}
+                    {attribute.items.map((attribute, index) => (
+                      <button
+                        key={index}
+                        className={
+                          isSelected(attribute.displayValue, "Capacity")
+                            ? `${classes.options} ${classes.active}`
+                            : `${classes.options}`
+                        }
+                        value={attribute.displayValue}
+                        onClick={handleChange}
+                        data-label="Capacity"
                       >
                         {attribute.displayValue}
-                      </option>
+                      </button>
                     ))}
-                  </select>
+                  </div>
+                </div>
+              )
+          )}
+          {currentProduct.attributes.map(
+            (attribute, index) =>
+              attribute.name === "With USB 3 ports" && (
+                <div key={index}>
+                  <div className={classes.titleDescription}>
+                    Select {attribute.name}
+                    {attribute.items.map((attribute, index) => (
+                      <button
+                        key={index}
+                        className={
+                          isSelected(attribute.displayValue, "With USB 3 ports")
+                            ? `${classes.options} ${classes.active}`
+                            : `${classes.options}`
+                        }
+                        value={attribute.displayValue}
+                        onClick={handleChange}
+                        data-label="With USB 3 ports"
+                      >
+                        {attribute.displayValue}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )
+          )}
+          {currentProduct.attributes.map(
+            (attribute, index) =>
+              attribute.name === "Touch ID in keyboard" && (
+                <div key={index}>
+                  <div className={classes.titleDescription}>
+                    Select {attribute.name}
+                    {attribute.items.map((attribute, index) => (
+                      <button
+                        key={index}
+                        className={
+                          isSelected(
+                            attribute.displayValue,
+                            "Touch ID in keyboard"
+                          )
+                            ? `${classes.options} ${classes.active}`
+                            : `${classes.options}`
+                        }
+                        value={attribute.displayValue}
+                        onClick={handleChange}
+                        data-label="Touch ID in keyboard"
+                      >
+                        {attribute.displayValue}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               )
           )}
@@ -135,7 +239,8 @@ const ProductDescriptionPage = (props) => {
         <div className={classes.titleDescription}>
           Price:
           <p className={classes.price}>
-            {defaultCurrency.currency.symbol + defaultCurrency.amount}
+            {defaultCurrency.currency.symbol +
+              defaultCurrency.amount.toFixed(2)}
           </p>
         </div>
         <div>

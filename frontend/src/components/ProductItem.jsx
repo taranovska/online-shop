@@ -16,6 +16,7 @@ class ProductItem extends PureComponent {
     const defaultCurrency = this.props.prices.find(
       (price) => price.currency.symbol === this.props.currency
     );
+    console.log(this.props.attributes);
     const enteredAmountNumber = 1;
     this.context.addItem({
       id: this.props.keys,
@@ -23,6 +24,7 @@ class ProductItem extends PureComponent {
       amount: enteredAmountNumber,
       prices: this.props.prices,
       attributes: this.props.attributes,
+      allAttributes: this.props.attributes,
       img: this.props.img,
       currency: this.props.currency,
     });
@@ -41,7 +43,7 @@ class ProductItem extends PureComponent {
 
     return (
       <React.Fragment>
-        <Link to={`/pdp/${this.props.keys}`} className={classes.links}>
+        <Link to={`/${this.props.keys}`} className={classes.links}>
           <div className={classes.productCard} key={this.props.keys}>
             <div
               className={imgBox}

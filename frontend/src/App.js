@@ -53,7 +53,7 @@ class App extends PureComponent {
 
           <Routes>
             <Route
-              path={"/pdp/:productId"}
+              path={"/:productId"}
               element={
                 <ProductDescriptionPage
                   allItems={allItems}

@@ -6,6 +6,21 @@ import classes from "./CartItem.module.css";
 class CartItem extends Component {
   constructor(props) {
     super();
+    this.isSelected = this.isSelected.bind(this);
+  }
+  isSelected(el, el2) {
+    const currentAttr = this.props.item.attributes.find(
+      (attr) => attr?.id === el2 || attr?.title === el2
+    );
+    console.log(currentAttr);
+    if (currentAttr.value === el) return true;
+    else return false;
+  }
+  defaultAttributes = [];
+  currentAttr(el, el2) {
+    this.props.item.attributes.find(
+      (attr) => attr?.id === el2 || attr?.title === el2
+    );
   }
 
   render() {
@@ -20,44 +35,35 @@ class CartItem extends Component {
         <div className={classes.cardItemDetail}>
           <div>{this.props.item.name}</div>
           <div>
-            {defaultCurrency} {currentPrice.amount}
+            {defaultCurrency} {currentPrice.amount.toFixed(2)}
           </div>
           <div className={classes.sizesBox}>
             <div className={classes.sizes}>
               <div>
-                {this.props.item.attributes.map(
-                  (attribute, index) =>
-                    attribute.title === "Color" && (
-                      <div>
-                        <div className={classes.allBoxesSize}>
-                          <div className={classes.attributeTitle}>
-                            {attribute.title}
-                          </div>
-                          <div
-                            className={classes.sizeBox}
-                            style={{ backgroundColor: attribute.value }}
-                          >
-                            {attribute.value}
-                          </div>
+                {
+                  <div>
+                    {this.props.item.allAttributes.map((attr, index) => {
+                      return (
+                        <div key={index}>
+                          {attr.items.map((el, index) => {
+                            return (
+                              <div
+                                key={index}
+                                className={
+                                  this.isSelected(el.displayValue, attr.id)
+                                    ? `${classes.options} ${classes.active}`
+                                    : `${classes.options}`
+                                }
+                              >
+                                {el.displayValue}
+                              </div>
+                            );
+                          })}
                         </div>
-                      </div>
-                    )
-                )}
-                {this.props.item.attributes.map(
-                  (attribute, index) =>
-                    attribute.title !== "Color" && (
-                      <div>
-                        <div className={classes.allBoxesSize}>
-                          <div className={classes.attributeTitle}>
-                            {attribute.title}
-                          </div>
-                          <div className={classes.attributeTitle}>
-                            {attribute.value}
-                          </div>
-                        </div>
-                      </div>
-                    )
-                )}
+                      );
+                    })}
+                  </div>
+                }
               </div>
             </div>
           </div>

@@ -95,3 +95,25 @@
   color: #1d1f22;
   margin-right: 10px;
 }
+.options {
+  background-color: white;
+  width: 63px;
+  height: 45px;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #1d1f22;
+  color: #1d1f22;
+  box-sizing: border-box;
+  font-family: Source Sans Pro;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+.active {
+  background: #1d1f22;
+  color: white;
+}
