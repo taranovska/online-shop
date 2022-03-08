@@ -36,14 +36,17 @@ class MyBag extends PureComponent {
           <p className={classes.bagTitle}>
             <span>My Bag,</span> {numberOfCartItems} items
           </p>
-          {this.context.items.map((item) => (
-            <CartItem
-              item={item}
-              key={item.id}
-              onAdd={this.cartItemAddHandler.bind(null, item)}
-              onRemove={this.cartItemRemoveHandler.bind(null, item.id)}
-            ></CartItem>
-          ))}
+          <div className={classes.addedItems}>
+            {this.context.items.map((item) => (
+              <CartItem
+                item={item}
+                key={item.id}
+                onAdd={this.cartItemAddHandler.bind(null, item)}
+                onRemove={this.cartItemRemoveHandler.bind(null, item.id)}
+              ></CartItem>
+            ))}
+          </div>
+
           <div className={classes.total}>
             <div>Total</div>
             <div>{totalAmount}</div>

@@ -5,8 +5,12 @@
   padding: 20px;
   padding-left: 16px;
   position: absolute;
-  left: 1028px;
+  left: 1082px;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+.addedItems {
+  max-height: 350px;
+  overflow-y: scroll;
 }
 
 .changeQuantityButton,
@@ -72,7 +76,7 @@
 .backdrop {
   position: fixed;
   top: 80px;
-  left: -80px;
+  left: 0px;
   width: 100%;
   height: 100vh;
   z-index: 10;

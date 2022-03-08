@@ -10,9 +10,8 @@ class CartItem extends Component {
   }
   isSelected(el, el2) {
     const currentAttr = this.props.item.attributes.find(
-      (attr) => attr?.id === el2 || attr?.title === el2
+      (attr) => attr.id === el2 || attr.title === el2
     );
-    console.log(currentAttr);
     if (currentAttr.value === el) return true;
     else return false;
   }
@@ -42,26 +41,51 @@ class CartItem extends Component {
               <div>
                 {
                   <div>
-                    {this.props.item.allAttributes.map((attr, index) => {
-                      return (
-                        <div key={index}>
-                          {attr.items.map((el, index) => {
-                            return (
-                              <div
-                                key={index}
-                                className={
-                                  this.isSelected(el.displayValue, attr.id)
-                                    ? `${classes.options} ${classes.active}`
-                                    : `${classes.options}`
-                                }
-                              >
-                                {el.displayValue}
-                              </div>
-                            );
-                          })}
-                        </div>
-                      );
-                    })}
+                    {this.props.item.allAttributes.map(
+                      (attr, index) =>
+                        attr.name !== "Color" && (
+                          <div key={index} className={classes.flex}>
+                            {attr.items.map((el, index) => {
+                              return (
+                                <div>
+                                  <div
+                                    key={index}
+                                    className={
+                                      this.isSelected(el.displayValue, attr.id)
+                                        ? `${classes.options} ${classes.active}`
+                                        : `${classes.options}`
+                                    }
+                                  >
+                                    {el.displayValue}
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )
+                    )}
+                    {this.props.item.allAttributes.map(
+                      (attr, index) =>
+                        attr.name === "Color" && (
+                          <div key={index} className={classes.flex}>
+                            {attr.items.map((el, index) => {
+                              return (
+                                <div>
+                                  <div
+                                    key={index}
+                                    className={
+                                      this.isSelected(el.displayValue, attr.id)
+                                        ? `${classes.options} ${classes.border}`
+                                        : `${classes.options}`
+                                    }
+                                    style={{ background: `${el.displayValue}` }}
+                                  ></div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )
+                    )}
                   </div>
                 }
               </div>

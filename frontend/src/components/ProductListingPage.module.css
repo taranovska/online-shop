@@ -7,3 +7,11 @@
   margin-bottom: 103px;
   text-transform: capitalize;
 }
+.flex {
+  width: 1440px;
+  display: flex;
+  align-content: space-between;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}

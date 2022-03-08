@@ -17,7 +17,7 @@ const ProductDescriptionPage = (props) => {
   );
   const inStock = currentProduct.inStock;
   let defaultAttributes = [];
-  currentProduct.attributes.map((attribute) =>
+  currentProduct.attributes?.map((attribute) =>
     defaultAttributes.push({
       title: attribute.name,
       value: attribute.items[0].displayValue,
@@ -26,7 +26,7 @@ const ProductDescriptionPage = (props) => {
   );
 
   const [attributes, setAttributes] = useState(defaultAttributes);
-  console.log(currentProduct.attributes);
+  console.log(attributes);
   const handleChange = (e) => {
     let title = e.target.dataset.label;
     let value = e.target.value;
@@ -56,6 +56,7 @@ const ProductDescriptionPage = (props) => {
       currency: defaultCurrency.currency.symbol,
     });
   };
+  console.log(currentProduct.attributes);
   const [image, setImage] = useState(currentProduct.gallery[0]);
 
   const mainImage = inStock
@@ -72,7 +73,6 @@ const ProductDescriptionPage = (props) => {
   };
 
   const [selected, setSelected] = useState(false);
-  console.log(attributes);
 
   return (
     <div className={classes.wrapper}>
@@ -106,29 +106,31 @@ const ProductDescriptionPage = (props) => {
                 <div key={index}>
                   <div className={classes.titleDescription}>
                     Select {attribute.name}
-                    {attribute.items.map((attribute, index) => (
-                      <button
-                        key={index}
-                        className={
-                          isSelected(attribute.displayValue, "Size")
-                            ? `${classes.options} ${classes.active}`
-                            : `${classes.options}`
-                        }
-                        value={attribute.displayValue}
-                        onClick={handleChange}
-                        data-label="Size"
-                        style={
-                          isSelected(attribute.displayValue, "Size")
-                            ? {
-                                background: "#1d1f22",
-                                color: "white",
-                              }
-                            : null
-                        }
-                      >
-                        {attribute.displayValue}
-                      </button>
-                    ))}
+                    <div className={classes.flex}>
+                      {attribute.items.map((attribute, index) => (
+                        <button
+                          key={index}
+                          className={
+                            isSelected(attribute.displayValue, "Size")
+                              ? `${classes.options} ${classes.active}`
+                              : `${classes.options}`
+                          }
+                          value={attribute.displayValue}
+                          onClick={handleChange}
+                          data-label="Size"
+                          style={
+                            isSelected(attribute.displayValue, "Size")
+                              ? {
+                                  background: "#1d1f22",
+                                  color: "white",
+                                }
+                              : null
+                          }
+                        >
+                          {attribute.displayValue}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
               )

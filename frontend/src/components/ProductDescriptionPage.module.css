@@ -2,13 +2,15 @@
 
 .wrapper {
   display: grid;
-  grid-template-columns: 80px 610px 300px;
+  grid-template-columns: 118px 710px 300px;
   grid-template-rows: auto;
+  margin-top: 80px;
 }
 
 .smallImages {
   width: 80px;
   height: 79px;
+  margin-bottom: 10px;
 }
 
 .addToCartButton {
@@ -118,6 +120,10 @@
   line-height: 18px;
   text-align: center;
   letter-spacing: 0.05em;
+}
+.flex {
+  display: flex;
+  margin-right: 12px;
 }
 .active {
   background: #1d1f22;

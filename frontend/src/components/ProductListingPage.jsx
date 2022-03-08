@@ -42,7 +42,7 @@ class ProductListingPage extends PureComponent {
     return (
       <div>
         <p className={classes.categoryName}>{this.props.route}</p>
-        <div>
+        <div className={classes.flex}>
           {products.map((product, index) => (
             <ProductItem
               key={product.id}

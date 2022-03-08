@@ -1,15 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&family=Roboto+Condensed:wght@700&family=Roboto:wght@400;500;700&family=Source+Sans+Pro&display=swap");
 
 .header {
-  width: 1440px;
+  width: 1240px;
   display: flex;
-  padding: 25px 100px;
+  padding: 25px 0px;
   justify-content: space-between;
   align-items: center;
 }
 
 .wrapper {
-  width: 1200px;
+  width: 1440px;
   display: flex;
 }
 
@@ -38,6 +38,7 @@
 
 .currency_cart {
   display: flex;
+  margin-right: 22px;
 }
 
 .selected_currency {
@@ -59,4 +60,7 @@
   border-radius: 60px;
   background-repeat: no-repeat;
   text-align: center;
+}
+.currencyBag {
+  display: flex;
 }

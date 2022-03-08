@@ -2,7 +2,7 @@
   padding: 10px 0px;
   position: absolute;
   width: 114px;
-  left: 914px;
+  left: 714px;
   top: 65px;
   text-align: left;
   background-color: white;
@@ -11,7 +11,7 @@
 
 .backdrop {
   position: absolute;
-  left: 914px;
+  left: 1256px;
   top: 65px;
   text-align: left;
   z-index: 10;

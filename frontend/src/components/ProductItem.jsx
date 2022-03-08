@@ -9,25 +9,34 @@ class ProductItem extends PureComponent {
   constructor(props) {
     super(props);
     this.addToCartButtonHandler = this.addToCartButtonHandler.bind(this);
+    this.state = {
+      attributes: [],
+    };
+    this.props.attributes.map((attribute) =>
+      this.state.attributes.push({
+        title: attribute.name,
+        value: attribute.items[0].displayValue,
+        selected: true,
+      })
+    );
   }
   static contextType = CartContext;
   addToCartButtonHandler(event) {
     event.preventDefault();
-    const defaultCurrency = this.props.prices.find(
-      (price) => price.currency.symbol === this.props.currency
-    );
-    console.log(this.props.attributes);
     const enteredAmountNumber = 1;
     this.context.addItem({
       id: this.props.keys,
       name: this.props.title,
       amount: enteredAmountNumber,
       prices: this.props.prices,
-      attributes: this.props.attributes,
+      attributes: this.state.attributes,
       allAttributes: this.props.attributes,
       img: this.props.img,
       currency: this.props.currency,
     });
+  }
+  outOfStockHandler(event) {
+    event.preventDefault();
   }
 
   render() {
@@ -36,7 +45,6 @@ class ProductItem extends PureComponent {
     );
     const image = this.props.img;
     const { inStock } = this.props;
-
     const imgBox = inStock
       ? `${classes.mainImg}`
       : `${classes.mainImg} ${classes.opacity}`;
@@ -62,7 +70,11 @@ class ProductItem extends PureComponent {
             </div>
             <div
               className={classes.bucket}
-              onClick={this.addToCartButtonHandler}
+              onClick={
+                inStock === true
+                  ? this.addToCartButtonHandler
+                  : this.outOfStockHandler
+              }
             >
               <svg
                 width="74"
@@ -83,10 +95,15 @@ class ProductItem extends PureComponent {
                     cx="37"
                     cy="33"
                     r="26"
-                    fill="black"
+                    fill={inStock === true ? "black" : "white"}
                     fillOpacity="0.05"
                   />
-                  <circle cx="37" cy="33" r="26" fill="#5ECE7B" />
+                  <circle
+                    cx="37"
+                    cy="33"
+                    r="26"
+                    fill={inStock === true ? "#5ECE7B" : "white"}
+                  />
                   <path
                     d="M48.4736 26.8484C48.0186 26.2925 47.3109 25.9546 46.5785 25.9546H31.1907L30.711 24.1669C30.4326 23.1277 29.4732 22.4028 28.3608 22.4028H25.7837C25.3544 22.4028 25 22.7407 25 23.1523C25 23.5628 25.3534 23.9017 25.7837 23.9017H28.3608C28.7398 23.9017 29.0685 24.1433 29.1692 24.5058L32.2517 36.2494C32.53 37.2886 33.4894 38.0135 34.6018 38.0135H44.6833C45.7947 38.0135 46.7808 37.2886 47.0335 36.2494L48.9286 28.807C49.1053 28.1293 48.9543 27.4044 48.4736 26.8485L48.4736 26.8484ZM47.3879 28.4671L45.4928 35.9095C45.3921 36.272 45.0634 36.5136 44.6844 36.5136H34.6018C34.2228 36.5136 33.8941 36.272 33.7935 35.9095L31.5953 27.4772H46.5796C46.8323 27.4772 47.085 27.598 47.237 27.7915C47.388 27.984 47.463 28.2257 47.388 28.4673L47.3879 28.4671Z"
                     fill="white"
