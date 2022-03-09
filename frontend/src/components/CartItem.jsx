@@ -8,6 +8,7 @@ class CartItem extends Component {
     super();
     this.isSelected = this.isSelected.bind(this);
   }
+
   isSelected(el, el2) {
     const currentAttr = this.props.item.attributes.find(
       (attr) => attr.id === el2 || attr.title === el2
@@ -15,7 +16,9 @@ class CartItem extends Component {
     if (currentAttr.value === el) return true;
     else return false;
   }
+
   defaultAttributes = [];
+
   currentAttr(el, el2) {
     this.props.item.attributes.find(
       (attr) => attr?.id === el2 || attr?.title === el2
@@ -116,6 +119,7 @@ class CartItem extends Component {
     );
   }
 }
+
 const mapStateToProps = (state) => {
   return {
     currency: state.currency,

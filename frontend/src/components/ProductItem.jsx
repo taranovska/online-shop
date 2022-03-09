@@ -35,6 +35,7 @@ class ProductItem extends PureComponent {
       currency: this.props.currency,
     });
   }
+  
   outOfStockHandler(event) {
     event.preventDefault();
   }

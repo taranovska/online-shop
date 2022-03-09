@@ -38,9 +38,6 @@ class Header extends PureComponent {
 
   setShowMyBag() {
     this.setState({ showMyBag: true });
-    console.log(this.state);
-    const { showMyBag } = this.state;
-    console.log(showMyBag);
   }
 
   setCloseMyBag() {

@@ -1,21 +1,22 @@
-import { useReducer, useState } from "react";
+import { useReducer } from "react";
 import CartContext from "./cart-context";
 
 const defaultCartState = {
   items: [],
   totalAmount: 0,
   currency: "$",
-  selectedAttributes: [],
 };
 
 const cartReducer = (state, action) => {
   if (action.type === "ADD") {
-    const price = action.item.prices.filter(
-      (price) => price.currency.symbol === action.item.currency
-    );
+    const price = action.item.prices.find((pr) =>
+      state.currency !== undefined
+        ? String(pr.currency.symbol) === String(state.currency)
+        : String(pr.currency.symbol) === "$"
+    ).amount;
     const updatedTotalAmount = +(
       state.totalAmount +
-      price[0].amount * action.item.amount
+      price * action.item.amount
     );
     const existingCartItemIndex = state.items.findIndex(
       (item) => item.id === action.item.id
@@ -45,13 +46,13 @@ const cartReducer = (state, action) => {
       (item) => item.id === action.id
     );
     const existingItem = state.items[existingCartItemIndex];
-    console.log(existingItem);
-    console.log(state);
-    const price = existingItem.prices.filter(
-      (price) => price.currency.symbol === existingItem.currency
-    )[0].amount;
-    console.log(existingItem.currency);
-    console.log(price);
+
+    const price = existingItem.prices.find((pr) =>
+      state.currency !== undefined
+        ? pr.currency.symbol === String(state.currency)
+        : pr.currency.symbol === "$"
+    ).amount;
+
     const updatedTotalAmount = state.totalAmount - price;
     let updatedItems;
     if (existingItem.amount === 1) {
@@ -67,16 +68,11 @@ const cartReducer = (state, action) => {
     };
   }
   if (action.type === "CHANGE_CURRENCY") {
-    console.log("changing");
-    console.log(state);
     const updatedCurrency = action.currency.currency;
-    console.log(updatedCurrency);
-
     const newTotal =
       state.items.length > 0 &&
       state.items
         .map((element) => {
-          console.log(element);
           const price = element.prices.find(
             (price) => price.currency.symbol === updatedCurrency
           ).amount;
@@ -89,8 +85,8 @@ const cartReducer = (state, action) => {
 
     return {
       ...state,
-      currency: updatedCurrency,
-      totalAmount: newTotal || state.totalAmount,
+      currency: String(updatedCurrency),
+      totalAmount: newTotal,
     };
   }
 

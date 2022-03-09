@@ -46,7 +46,6 @@ class MyBag extends PureComponent {
               ></CartItem>
             ))}
           </div>
-
           <div className={classes.total}>
             <div>Total</div>
             <div>{totalAmount}</div>

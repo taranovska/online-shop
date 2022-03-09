@@ -16,6 +16,7 @@ class Cart extends PureComponent {
   cartItemAddHandler(item) {
     this.context.addItem({ ...item, amount: 1 });
   }
+  
   cartItemRemoveHandler(id) {
     this.context.removeItem(id);
   }

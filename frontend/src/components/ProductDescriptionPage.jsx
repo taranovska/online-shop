@@ -12,9 +12,11 @@ const ProductDescriptionPage = (props) => {
   const currentProduct = props.allItems.find(
     (product) => product.id === params.productId
   );
+
   const defaultCurrency = currentProduct.prices.find(
     (curSymbol) => curSymbol.currency.symbol === props.currency
   );
+  
   const inStock = currentProduct.inStock;
   let defaultAttributes = [];
   currentProduct.attributes?.map((attribute) =>
@@ -26,12 +28,9 @@ const ProductDescriptionPage = (props) => {
   );
 
   const [attributes, setAttributes] = useState(defaultAttributes);
-  console.log(attributes);
   const handleChange = (e) => {
     let title = e.target.dataset.label;
     let value = e.target.value;
-
-    let currAttribute = { title, value };
 
     const newArrAttribute = attributes.find(
       (attribute) => attribute.title === title
@@ -56,7 +55,6 @@ const ProductDescriptionPage = (props) => {
       currency: defaultCurrency.currency.symbol,
     });
   };
-  console.log(currentProduct.attributes);
   const [image, setImage] = useState(currentProduct.gallery[0]);
 
   const mainImage = inStock

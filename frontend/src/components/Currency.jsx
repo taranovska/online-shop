@@ -9,6 +9,7 @@ class Currency extends Component {
     super(props);
     this.changeCurrencyHandler = this.changeCurrencyHandler.bind(this);
   }
+
   static contextType = CartContext;
 
   changeCurrencyHandler(event, currency) {
